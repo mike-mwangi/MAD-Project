@@ -9,4 +9,6 @@
     <string name="password">Password</string>
     <string name="register">Register</string>
     <string name="already_have_an_account_log_in">Already have an account? Log In</string>
+    <string name="login">Login</string>
+    <string name="fab">FAB</string>
 </resources>
