@@ -9,4 +9,20 @@
     <string name="password">Password</string>
     <string name="register">Register</string>
     <string name="already_have_an_account_log_in">Already have an account? Log In</string>
+    <string name="login">Login</string>
+    <string name="fab">FAB</string>
+    <string name="dot">•</string>
+    <string name="write_tags_here_text">Write tags here</string>
+    <string name="textViewTitle">How to write a good proposal for your project</string>
+    <string name="img_article_thumbnail_description">imgArticleThumbnailDescription</string>
+    <string name="img_author_profile_pic">img_author_profile_pic</string>
+    <string name="author_name">Author name</string>
+    <string name="article_date">1/1/2021</string>
+    <string name="read_duration">9 min read</string>
+    <string name="option_icon_description">option_icon_description</string>
+    <string name="bookmark_icon_description">bookmark icon description</string>
+    <string name="trending_reads_today">Trending reads today</string>
+    <string name="notifications">Notifications</string>
+    <string name="search">Search</string>
+
 </resources>
