@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/phone_number"
             >
-            >
+
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -120,7 +120,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/reg"
         android:text="@string/register"
-        android:layout_marginBottom="20dp"
+
 
         />
 
@@ -129,7 +129,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/already_have_an_account_log_in"
-        android:onClick="toLogin"/>
+        android:onClick="toLogin"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:textColor="@color/colorPrimaryDark"
+        android:textAllCaps="false"/>
 
 
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.example.madproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,7 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -19,6 +24,8 @@ public class Sign_Up extends AppCompatActivity {
 
     FirebaseDatabase rootNode;
     DatabaseReference reference;
+    DatabaseReference authReference;
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +39,8 @@ public class Sign_Up extends AppCompatActivity {
         passw = findViewById(R.id.passw);
         register = findViewById(R.id.reg);
         toLogin =findViewById(R.id.toLogin);
+
+        mAuth= FirebaseAuth.getInstance();
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,16 +75,26 @@ public class Sign_Up extends AppCompatActivity {
                 }else{
                     rootNode = FirebaseDatabase.getInstance();
                     reference = rootNode.getReference("users");
+                   // authReference=rootNode.getReference();
+                    mAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            String userId=mAuth.getCurrentUser().getUid();
+
+                            UserHelper helper = new UserHelper(name,username,email,number,pass);
+
+                            reference.child(userId).setValue(helper);
+
+                            Toast.makeText(Sign_Up.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+
+                            Intent toLanding = new Intent( Sign_Up.this, HomeActivity.class);
+                            startActivity(toLanding);
 
 
-                    UserHelper helper = new UserHelper(name,username,email,number,pass);
+                        }
+                    });
 
-                    reference.child(username).setValue(helper);
 
-                    Intent toLanding = new Intent( Sign_Up.this, Landing_Page.class);
-                    startActivity(toLanding);
-
-                    Toast.makeText(Sign_Up.this, "Registration Successful", Toast.LENGTH_SHORT).show();
                 }
 
 

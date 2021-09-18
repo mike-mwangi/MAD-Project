@@ -24,5 +24,8 @@
     <string name="trending_reads_today">Trending reads today</string>
     <string name="notifications">Notifications</string>
     <string name="search">Search</string>
+    <string name="create_a_new_account">Create a new account</string>
+    <string name="forgot_password">Forgot Password?</string>
+
 
 </resources>
