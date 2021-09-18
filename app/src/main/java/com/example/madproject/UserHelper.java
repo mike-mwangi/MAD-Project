@@ -1,4 +1,4 @@
-package com.example.madproject;
+  package com.example.madproject;
 
 public class UserHelper {
     String fname,email,number,password,username;
@@ -54,5 +54,7 @@ public class UserHelper {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
 
 }

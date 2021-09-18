@@ -69,11 +69,11 @@ public class HomeActivity extends AppCompatActivity {
 
         mainFeedArticles = new ArrayList<>();
 
-        rvMainFeed = findViewById(R.id.rvMainFeed);
-        rvMainFeed.setLayoutManager(new LinearLayoutManager(HomeActivity.this));
+       // rvMainFeed = findViewById(R.id.rvMainFeed);
+      //  rvMainFeed.setLayoutManager(new LinearLayoutManager(HomeActivity.this));
 
         mainArticleAdapter = new MainArticleAdapter(HomeActivity.this, mainFeedArticles);
-        rvMainFeed.setAdapter(mainArticleAdapter);
+      //  rvMainFeed.setAdapter(mainArticleAdapter);
 
     }
 

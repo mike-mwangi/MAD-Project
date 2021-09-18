@@ -24,6 +24,11 @@
     <string name="trending_reads_today">Trending reads today</string>
     <string name="notifications">Notifications</string>
     <string name="search">Search</string>
+
+    <string name="email_not_verified">The email above is not verified \n Click on the button below to verify it</string>
+    <string name="resend_verification">Resend Verification Email</string>
+    <string name="forgot_pass">Forgot Password</string>
+
     <string name="create_a_new_account">Create a new account</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="blog">Blog</string>
@@ -34,6 +39,7 @@
     <string name="insert_blog_image">Insert blog image</string>
     <string name="title">Title</string>
     <string name="publish">Publish</string>
+
 
 
 </resources>
