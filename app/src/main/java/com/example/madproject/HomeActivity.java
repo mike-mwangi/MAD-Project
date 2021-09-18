@@ -6,13 +6,18 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
 import android.widget.ImageView;
 import com.example.madproject.Adapters.MainArticleAdapter;
 import com.example.madproject.Models.Article;
 import java.util.ArrayList;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 
@@ -25,6 +30,7 @@ public class HomeActivity extends AppCompatActivity {
     private RecyclerView rvMainFeed;
     private ArrayList<Article> mainFeedArticles;
     private MainArticleAdapter mainArticleAdapter;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +41,20 @@ public class HomeActivity extends AppCompatActivity {
         initialize();
 
 
+
         //Populate main feed and set adapter
         populateMainFeedArticles();
         mainArticleAdapter.notifyDataSetChanged();
 
+        //Open the new blog/audio content page
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toPost= new Intent(HomeActivity.this,PostingActivity.class);
+                startActivity(toPost);
 
+            }
+        });
     }
 
 
@@ -50,6 +65,7 @@ public class HomeActivity extends AppCompatActivity {
 
         toolbar.setTitle("Home");
 
+        fab=findViewById(R.id.fab);
 
         mainFeedArticles = new ArrayList<>();
 
