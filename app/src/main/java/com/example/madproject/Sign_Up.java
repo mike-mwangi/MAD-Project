@@ -27,18 +27,18 @@ public class Sign_Up extends AppCompatActivity {
     TextInputLayout fName,Email,pno,passw,Uname;
     Button register,toLogin;
     FirebaseAuth mAuth;
-    public String TAG=this.getPackageName();
+    public String TAG="SIGNUP_ACTIVITY";
 
     FirebaseDatabase rootNode;
     DatabaseReference reference;
     DatabaseReference authReference;
-    FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-mAuth=FirebaseAuth.getInstance();
+        mAuth=FirebaseAuth.getInstance();
         fName = findViewById(R.id.fName);
         Uname = findViewById(R.id.uName);
         Email = findViewById(R.id.email);
@@ -96,9 +96,19 @@ mAuth=FirebaseAuth.getInstance();
 
                             Intent toLanding = new Intent( Sign_Up.this, HomeActivity.class);
                             startActivity(toLanding);
+                            FirebaseUser user = mAuth.getCurrentUser();
+
+                            try {
+                                if (user != null)
+                                {
+                                    sendEmailVerification(user);
+                                }
+                            }catch (Exception e) {
+                                e.printStackTrace();
+                            }
 
 
-                    UserHelper helper = new UserHelper(name, username, email, number, pass);
+                            //      UserHelper helper = new UserHelper(name, username, email, number, pass);
 
 
                         }
@@ -109,65 +119,9 @@ mAuth=FirebaseAuth.getInstance();
                     Toast.makeText(Sign_Up.this, "Registration Successful", Toast.LENGTH_SHORT).show();
 
                 }
-
-
-
-                    mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(Sign_Up.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d(TAG, "createUserWithEmail:success");
-                                FirebaseUser user = mAuth.getCurrentUser();
-
-                                try {
-                                    if (user != null)
-                                        user.sendEmailVerification()
-                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        if (task.isSuccessful()) {
-                                                            Log.d(TAG, "Email sent.");
-
-                                                            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                                                                    Sign_Up.this);
-
-                                                            // set title
-                                                            alertDialogBuilder.setTitle("Please Verify Your EmailID");
-
-                                                            // set dialog message
-                                                            alertDialogBuilder
-                                                                    .setMessage("A verification Email Is Sent To Your Registered EmailID, please click on the link and Sign in again!")
-                                                                    .setCancelable(false)
-                                                                    .setPositiveButton("Sign In", new DialogInterface.OnClickListener() {
-                                                                        public void onClick(DialogInterface dialog, int id) {
-
-                                                                            Intent signInIntent = new Intent(Sign_Up.this, Login.class);
-                                                                            Sign_Up.this.finish();
-                                                                        }
-                                                                    });
-
-                                                            // create alert dialog
-                                                            AlertDialog alertDialog = alertDialogBuilder.create();
-
-                                                            // show it
-                                                            alertDialog.show();
-
-
-                                                        }
-                                                    }
-                                                });
-                                } catch (Exception e) {
-
-                                }
-                            }
-                        }
-                    });
                 }
 
 
-            }
         });
 
 
@@ -176,5 +130,42 @@ mAuth=FirebaseAuth.getInstance();
     public void toLogin(View view) {
         Intent tologin = new Intent(this, Login.class);
         startActivity(tologin);
+    }
+    public void sendEmailVerification(FirebaseUser user) throws Exception{
+            user.sendEmailVerification()
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Log.d(TAG, "Email sent.");
+
+                                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                                        Sign_Up.this);
+
+                                // set title
+                                alertDialogBuilder.setTitle("Please Verify Your EmailID");
+
+                                // set dialog message
+                                alertDialogBuilder
+                                        .setMessage("A verification Email Is Sent To Your Registered EmailID, please click on the link and Sign in again!")
+                                        .setCancelable(false)
+                                        .setPositiveButton("Sign In", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+
+                                                Intent signInIntent = new Intent(Sign_Up.this, Login.class);
+                                                Sign_Up.this.finish();
+                                            }
+                                        });
+
+                                // create alert dialog
+                                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                                // show it
+                                alertDialog.show();
+
+
+                            }
+                        }
+                    });
     }
 }

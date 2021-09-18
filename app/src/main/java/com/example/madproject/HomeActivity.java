@@ -60,20 +60,20 @@ public class HomeActivity extends AppCompatActivity {
 
     private void initialize() {
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    //    Toolbar toolbar = findViewById(R.id.toolbar);
+      //  setSupportActionBar(toolbar);
 
-        toolbar.setTitle("Home");
+        //toolbar.setTitle("Home");
 
         fab=findViewById(R.id.fab);
 
         mainFeedArticles = new ArrayList<>();
 
-       // rvMainFeed = findViewById(R.id.rvMainFeed);
-      //  rvMainFeed.setLayoutManager(new LinearLayoutManager(HomeActivity.this));
+        rvMainFeed = findViewById(R.id.list);
+      rvMainFeed.setLayoutManager(new LinearLayoutManager(HomeActivity.this));
 
         mainArticleAdapter = new MainArticleAdapter(HomeActivity.this, mainFeedArticles);
-      //  rvMainFeed.setAdapter(mainArticleAdapter);
+       rvMainFeed.setAdapter(mainArticleAdapter);
 
     }
 

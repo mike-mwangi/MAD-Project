@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity {
 private Button login, register;
     @Override
@@ -16,6 +19,10 @@ private Button login, register;
 
         login=findViewById(R.id.button);
         register=findViewById(R.id.button2);
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(currentUser !=null && currentUser.isEmailVerified()){
+            startActivity(new Intent(MainActivity.this,HomeActivity.class));
+        }
 
     }
 

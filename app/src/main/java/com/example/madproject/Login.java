@@ -3,13 +3,14 @@ package com.example.madproject;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-=======
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -44,8 +45,10 @@ public class Login extends AppCompatActivity {
     MaterialButton loginBtn;
     MaterialButton forgotPassBtn;
 
+
     public FirebaseAuth mAuth;
 private DatabaseReference dbRef;
+    private FirebaseUser user;
 
 
 
@@ -85,13 +88,16 @@ private DatabaseReference dbRef;
 
                     mAuth.signInWithEmailAndPassword(email.getEditText().getText().toString(), password.getEditText().getText().toString())
                             .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
+
+
+
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d(TAG, "signInWithEmail:success");
 
-                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        user = mAuth.getCurrentUser();
 
                                         if (user != null) {
                                             if (user.isEmailVerified()) {
@@ -107,7 +113,10 @@ private DatabaseReference dbRef;
                                             } else {
 
                                                 resendVerificationButton.setVisibility(View.VISIBLE);
+
                                                 notVerifiedText.setText("Please Verify your EmailID and SignIn");
+                                                notVerifiedText.setVisibility(View.VISIBLE);
+
 
                                             }
                                         }
@@ -133,6 +142,16 @@ private DatabaseReference dbRef;
             }
         });
 
+        resendVerificationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    sendEmailVerification(user);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         forgotPassBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,9 +171,9 @@ private DatabaseReference dbRef;
     public void toLogin(View view) {
         String emailString=email.getEditText().getText().toString();
         String passwordString=password.getEditText().getText().toString();
-        verify(emailString,passwordString);
+        //verify(emailString,passwordString);
     }
-    public void verify(String email,String password){
+  /*  public void verify(String email,String password){
 
         email=findViewById(R.id.emailAddress);
         password=findViewById(R.id.password);
@@ -173,6 +192,8 @@ private DatabaseReference dbRef;
         });
 
     }
+
+   */
     private void checkLogin(){
         String login_email=email.getEditText().getText().toString();
         String login_password=password.getEditText().getText().toString();
@@ -221,5 +242,42 @@ private DatabaseReference dbRef;
     public void signUp(View view) {
 
         startActivity(new Intent(Login.this, Sign_Up.class));
+    }
+    public void sendEmailVerification(FirebaseUser user) throws Exception{
+        user.sendEmailVerification()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "Email sent.");
+
+                            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                                    Login.this);
+
+                            // set title
+                            alertDialogBuilder.setTitle("Please Verify Your EmailID");
+
+                            // set dialog message
+                            alertDialogBuilder
+                                    .setMessage("A verification Email Is Sent To Your Registered EmailID, please click on the link and Sign in again!")
+                                    .setCancelable(false)
+                                    .setPositiveButton("Sign In", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+
+                                            Intent signInIntent = new Intent(Login.this, Login.class);
+                                            Login.this.finish();
+                                        }
+                                    });
+
+                            // create alert dialog
+                            AlertDialog alertDialog = alertDialogBuilder.create();
+
+                            // show it
+                            alertDialog.show();
+
+
+                        }
+                    }
+                });
     }
 }

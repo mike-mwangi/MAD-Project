@@ -134,7 +134,7 @@
         android:text="@string/already_have_an_account_log_in"
         android:onClick="toLogin"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:textColor="@color/colorPrimaryDark"
+
         android:textAllCaps="false"/>
 
 
