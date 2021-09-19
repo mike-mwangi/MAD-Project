@@ -33,12 +33,12 @@
             android:textAllCaps="false"
             android:textSize="20dp"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:textColor="@color/colorPrimaryDark"
             android:layout_marginBottom="35dp">
 
 
 
         </Button>
+
 
     <Button
         android:id="@+id/audio_upload"
@@ -47,5 +47,12 @@
         android:layout_gravity="center"
         android:text="@string/upload_audio"
         />
+        <Button
+            android:id="@+id/attach_audio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/upload_audio"
+            />
     </LinearLayout>
 </FrameLayout>

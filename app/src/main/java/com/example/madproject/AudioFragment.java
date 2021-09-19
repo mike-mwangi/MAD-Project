@@ -53,7 +53,7 @@ public class AudioFragment extends Fragment {
         audio_title=rootView.findViewById(R.id.audio_title);
         audio_image=rootView.findViewById(R.id.audio_image);
         audio_upload=rootView.findViewById(R.id.audio_upload);
-        attach_audio=rootView.findViewById(R.id.attach_audio);
+       attach_audio=rootView.findViewById(R.id.attach_audio);
         dbAudioRef =FirebaseDatabase.getInstance().getReference().child("audio");
 
         audio_image.setOnClickListener(new View.OnClickListener() {

@@ -1,6 +1,7 @@
 package com.example.madproject.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.madproject.BlogPostActivity;
 import com.example.madproject.Models.Article;
 import com.example.madproject.R;
 
@@ -30,7 +32,7 @@ public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.
 	@Override
 	public MainArticleViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 		return new MainArticleViewHolder(LayoutInflater.from(context)
-		.inflate(R.layout.article_item, viewGroup, false));
+		.inflate(R.layout.course_item, viewGroup, false));
 	}
 	
 	@Override
@@ -96,6 +98,12 @@ public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.
 			imgAuthorPic = itemView.findViewById(R.id.imgAuthorProfilePic);
 		
 			tvPremium = itemView.findViewById(R.id.imgPremium);
+			itemView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					view.getContext().startActivity(new Intent(view.getContext(), BlogPostActivity.class));
+				}
+			});
 			
 		}
 	}

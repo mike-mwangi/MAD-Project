@@ -74,6 +74,12 @@ public class HomeActivity extends AppCompatActivity {
 
         mainArticleAdapter = new MainArticleAdapter(HomeActivity.this, mainFeedArticles);
        rvMainFeed.setAdapter(mainArticleAdapter);
+       fab.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               startActivity(new Intent(HomeActivity.this,PostingActivity.class));
+           }
+       });
 
     }
 
