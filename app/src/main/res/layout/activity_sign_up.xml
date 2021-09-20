@@ -28,14 +28,14 @@
             android:id="@+id/fName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/full_name">
+            android:hint="@string/full_name"
+            android:layout_marginTop="8dp">
 
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:textColor="@color/black"
 
                 />
 
@@ -46,6 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/username"
+            android:layout_marginTop="8dp"
             >
 
 
@@ -53,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:textColor="@color/black"
+
 
                 />
 
@@ -63,14 +64,15 @@
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/email">
+            android:hint="@string/email"
+            android:layout_marginTop="8dp">
 
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:textColor="@color/black"
+
 
                 />
 
@@ -81,14 +83,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/phone_number"
+            android:layout_marginTop="8dp"
             >
-            >
+
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
-                android:textColor="@color/black"
+
 
                 />
 
@@ -100,14 +103,14 @@
             android:layout_height="wrap_content"
             android:hint="@string/password"
             app:passwordToggleEnabled="true"
+            android:layout_marginTop="8dp"
            >
-            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:textColor="@color/black"
+
 
                 />
 
@@ -120,16 +123,19 @@
         android:layout_height="wrap_content"
         android:id="@+id/reg"
         android:text="@string/register"
-        android:layout_marginBottom="20dp"
+
 
         />
 
     <Button
-        android:id="@+id/toLogin"
+        android:id="@+id/login_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/already_have_an_account_log_in"
-        android:onClick="toLogin"/>
+        android:onClick="toLogin"
+        style="@style/Widget.AppCompat.Button.Borderless"
+
+        android:textAllCaps="false"/>
 
 
 </LinearLayout>

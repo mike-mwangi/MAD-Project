@@ -1,19 +1,29 @@
 package com.example.madproject;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.widget.ImageView;
+import android.view.View;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.madproject.Adapters.MainArticleAdapter;
 import com.example.madproject.Models.Article;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
-import com.google.android.material.navigation.NavigationView;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -25,50 +35,98 @@ public class HomeActivity extends AppCompatActivity {
     private RecyclerView rvMainFeed;
     private ArrayList<Article> mainFeedArticles;
     private MainArticleAdapter mainArticleAdapter;
+    private FirebaseFirestore db;
+    private FloatingActionButton fab;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        //Ensure user doesn't have a blank screen while recycler view fetches posts
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setCancelable(true);
+        progressDialog.setMessage("Fetching Posts....");
+        progressDialog.show();
+
         //Initialize views and data structures
         initialize();
+
 
 
         //Populate main feed and set adapter
         populateMainFeedArticles();
         mainArticleAdapter.notifyDataSetChanged();
 
+        //Open the new blog/audio content page
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toPost= new Intent(HomeActivity.this,PostingActivity.class);
+                startActivity(toPost);
 
+            }
+        });
     }
 
 
     private void initialize() {
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    //    Toolbar toolbar = findViewById(R.id.toolbar);
+      //  setSupportActionBar(toolbar);
 
-        toolbar.setTitle("Home");
+        //toolbar.setTitle("Home");
 
-
+        fab=findViewById(R.id.fab);
+        db=FirebaseFirestore.getInstance();
         mainFeedArticles = new ArrayList<>();
 
-        rvMainFeed = findViewById(R.id.rvMainFeed);
-        rvMainFeed.setLayoutManager(new LinearLayoutManager(HomeActivity.this));
+        rvMainFeed = findViewById(R.id.list);
+      rvMainFeed.setLayoutManager(new LinearLayoutManager(HomeActivity.this));
 
         mainArticleAdapter = new MainArticleAdapter(HomeActivity.this, mainFeedArticles);
-        rvMainFeed.setAdapter(mainArticleAdapter);
+
+       fab.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               startActivity(new Intent(HomeActivity.this,PostingActivity.class));
+           }
+       });
 
     }
 
 
     private void populateMainFeedArticles() {
-
-        mainFeedArticles.add(new Article(articleImages[0], authorImages[0], "Florin Pop", "How to create a Countdown component using React & MomentJS", "4 min read", true, "Based on your reading history", "3/20/2018"));
+       /* mainFeedArticles.add(new Article(articleImages[0], authorImages[0], "Florin Pop", "How to create a Countdown component using React & MomentJS", "4 min read", true, "Based on your reading history", "3/20/2018"));
         mainFeedArticles.add(new Article(articleImages[3], authorImages[3], "Robert Roy Britt", "Coffee, Even a Lot, Linked to Longer Life", "6 min read", true,"Life", "6 days ago"));
         mainFeedArticles.add(new Article(articleImages[2], authorImages[2], "Paolo Rotolo", "Exploring new Coroutines and Lifecycle Architectural Components integration on Android", "7 min read", false, "Programming", "6 days ago"));
         mainFeedArticles.add(new Article(articleImages[1], authorImages[1], "Austin Tindle", "The Plight of a Junior Software Developer", "5 min read", true,"From your network", "5 days ago"));
-        mainFeedArticles.add(new Article(articleImages[0], authorImages[0], "Florin Pop", "How to create a Countdown component using React & MomentJS", "4 min read", true, "Based on your reading history", "3/20/2018"));
+        mainFeedArticles.add(new Article(articleImages[0], authorImages[0], "Florin Pop", "How to create a Countdown component using React & MomentJS", "4 min read", true, "Based on your reading history", "3/20/2018")); */
+
+        rvMainFeed.setAdapter(mainArticleAdapter);
+        db.collection("blogPost").orderBy("uploadDate", Query.Direction.DESCENDING)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable @org.jetbrains.annotations.Nullable QuerySnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
+                        if(error!=null){
+                            Log.e("Firestore Error",error.getMessage());
+                            return;
+                        }
+
+                        for(DocumentChange dc:value.getDocumentChanges()){
+                            if(dc.getType()==DocumentChange.Type.ADDED){
+                                mainFeedArticles.add(dc.getDocument().toObject(Article.class));
+                            }
+                            mainArticleAdapter.notifyDataSetChanged();
+                            if(progressDialog.isShowing()){
+                                progressDialog.dismiss();
+                            }
+                        }
+                    }
+                });
+
+
 
     }
 

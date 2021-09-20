@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".BlogFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <ImageButton
+            android:id="@+id/blogImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="20dp"
+            android:contentDescription="@string/insert_blog_image"
+            android:src="@drawable/ic_baseline_insert_photo"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/blogTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:hint="@string/title"
+            android:layout_marginBottom="20dp"
+            android:inputType="text"
+            app:layout_constraintTop_toBottomOf="@id/blogImage"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <net.dankito.richtexteditor.android.RichTextEditor
+            android:id="@+id/editor"
+            android:layout_width="match_parent"
+            android:layout_height="167dp"
+            android:layout_marginBottom="40dp"
+            android:gravity="top|left"
+            android:hint="Type story here"
+            app:layout_constraintTop_toBottomOf="@id/blogTitle"
+
+            />
+
+
+        <net.dankito.richtexteditor.android.toolbar.GroupedCommandsEditorToolbar
+            android:id="@+id/editorToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:background="@color/colorAccent"
+            app:layout_constraintTop_toBottomOf="@id/editor"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+        <Button
+            android:id="@+id/publishBlog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/publish"
+            android:layout_gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/editorToolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
