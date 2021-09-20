@@ -11,23 +11,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MADPROJECT.Blue">
+        <activity android:name=".ProfileActivity">
+
+        </activity>
         <activity
             android:name=".BlogPostActivity"
             android:theme="@style/MADPROJECT.Blue"
             android:parentActivityName=".HomeActivity"/>
         <!-- <activity android:name=".HomeActivity"></activity> -->
+
+            android:theme="@style/MADPROJECT.Blue" /> <!-- <activity android:name=".HomeActivity"></activity> -->
+
         <activity android:name=".Landing_Page" />
         <activity android:name=".Login" />
-        <activity android:name=".PostingActivity"
+        <activity
+            android:name=".PostingActivity"
             android:theme="@style/MADPROJECT.Blue" />
-        <activity android:name=".Sign_Up" />
+        <activity android:name=".Sign_Up">
+
+        </activity>
         <activity
             android:name=".HomeActivity"
             android:theme="@style/MADPROJECT.Blue" />
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/MADPROJECT.Blue"
-            >
+            android:theme="@style/MADPROJECT.Blue">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

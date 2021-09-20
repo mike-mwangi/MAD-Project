@@ -40,7 +40,15 @@
     <string name="title">Title</string>
     <string name="publish">Publish</string>
     <string name="pause_video">Pause</string>
+
     <string name="mytoken">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</string>
+
+    <string name="username_prof">Username</string>
+    <string name="full_name_prof">Full Name</string>
+    <string name="email_prof">Email</string>
+    <string name="phone_number_prof">Phone Number</string>
+    <string name="update_details_profilr">Update Details</string>
+
 
 
 </resources>
