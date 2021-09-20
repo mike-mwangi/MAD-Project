@@ -2,22 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/home"
-        android:title="Home"
-        android:icon="@drawable/ic_home" />
+        android:title="Explore"
+        android:icon="@drawable/ic_baseline_explore_24" />
 
     <item android:id="@+id/blog"
-        android:title="Blog"
+        android:title="Written Blogs"
         android:icon="@drawable/ic_blog" />
-
-    <item android:id="@+id/placeholder"
-        android:title="" />
-
     <item android:id="@+id/audio"
-        android:title="Audio"
+        android:title="Audio Blogs"
         android:icon="@drawable/ic_audio" />
+    <item android:id="@+id/blogsWithAudio"
+        android:title="Blogs with audio"
+        android:icon="@drawable/ic_baseline_airplay_24" />
 
-    <item android:id="@+id/profile"
+    <item android:id="@+id/myPosts"
         android:title="Profile"
-        android:icon="@drawable/ic_person" />
+        android:icon="@drawable/ic_baseline_filter_none_24" />
 
 </menu>

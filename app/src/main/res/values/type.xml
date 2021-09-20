@@ -15,29 +15,29 @@
 <resources>
 
   <style name="TextAppearance.Owl.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
-    <item name="fontFamily">@font/rubik_bold</item>
+    <item name="fontFamily">@font/quicksand</item>
     <item name="android:textStyle">bold</item>
   </style>
 
   <style name="TextAppearance.Owl.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
-    <item name="fontFamily">@font/rubik_bold</item>
+    <item name="fontFamily">@font/quicksand</item>
     <item name="android:textStyle">bold</item>
   </style>
 
   <style name="TextAppearance.Owl.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
-    <item name="fontFamily">@font/rubik_bold</item>
+    <item name="fontFamily">@font/quicksand</item>
     <item name="android:textStyle">bold</item>
   </style>
 
   <style name="TextAppearance.Owl.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
-    <item name="fontFamily">@font/rubik_bold</item>
+    <item name="fontFamily">@font/quicksand</item>
     <item name="android:textStyle">bold</item>
     <item name="android:textColor">?android:attr/textColorPrimary</item>
     <item name="lineHeight">40sp</item>
   </style>
 
   <style name="TextAppearance.Owl.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
-    <item name="fontFamily">@font/rubik_bold</item>
+    <item name="fontFamily">@font/quicksand</item>
     <item name="android:textStyle">bold</item>
   </style>
 
@@ -66,16 +66,16 @@
   </style>
 
   <style name="TextAppearance.Owl.Button" parent="TextAppearance.MaterialComponents.Button">
-    <item name="fontFamily">@font/rubik_bold</item>
+    <item name="fontFamily">@font/quicksand</item>
     <item name="android:textStyle">bold</item>
   </style>
 
   <style name="TextAppearance.Owl.Caption" parent="TextAppearance.MaterialComponents.Caption">
-    <item name="fontFamily">@font/rubik</item>
+    <item name="fontFamily">@font/quicksand</item>
   </style>
 
   <style name="TextAppearance.Owl.Overline" parent="TextAppearance.MaterialComponents.Overline">
-    <item name="fontFamily">@font/rubik</item>
+    <item name="fontFamily">@font/quicksand</item>
   </style>
 
   <style name="TextAppearance.Owl.BottomNavigation" parent="TextAppearance.Owl.Caption">

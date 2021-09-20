@@ -13,7 +13,10 @@
         <entry key="app/src/main/res/drawable-v24/small_component_foreground.xml" value="0.11574074074074074" />
         <entry key="app/src/main/res/drawable-v24/stroked_course_image_placeholder.xml" value="0.11574074074074074" />
         <entry key="app/src/main/res/drawable/divider.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_blog_post.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_add.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/ic_baseline_comment_24.xml" value="0.10520833333333333" />
+        <entry key="app/src/main/res/font/quicksand.xml" value="0.12314814814814815" />
+        <entry key="app/src/main/res/layout/activity_blog_post.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_landing_page.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.22" />
@@ -21,6 +24,7 @@
         <entry key="app/src/main/res/layout/activity_posting.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.41196777905638665" />
         <entry key="app/src/main/res/layout/article_item.xml" value="0.6033690658499234" />
+        <entry key="app/src/main/res/layout/comment_item_view.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/course_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/featured_item.xml" value="0.1621376811594203" />
         <entry key="app/src/main/res/layout/fragment_article_list.xml" value="0.1" />
@@ -29,6 +33,7 @@
         <entry key="app/src/main/res/layout/fragment_lessons_sheet.xml" value="0.18" />
         <entry key="app/src/main/res/layout/main_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/step_item.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/main_screen_options.xml" value="0.19322916666666667" />
       </map>
     </option>
   </component>

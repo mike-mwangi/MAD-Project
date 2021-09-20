@@ -62,12 +62,14 @@ import net.dankito.utils.android.permissions.PermissionsService;
 
 import org.jetbrains.annotations.NotNull;
 
+import kotlin.jvm.functions.Function1;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link BlogFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BlogFragment extends Fragment {
+public class BlogFragment extends Fragment implements Function1<String,String>{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -234,7 +236,7 @@ public class BlogFragment extends Fragment {
 
         Uri uri= MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
         editor.setDownloadImageConfig(new DownloadImageConfig(DownloadImageUiSetting.AllowSelectDownloadFolderInCode,
-                new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "downloaded_images")));
+                new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "downloaded_images"),null,this::invoke));
         /*      Set listeners on RichTextEditor         */
 
         // get informed when edited HTML changed
@@ -250,9 +252,9 @@ public class BlogFragment extends Fragment {
       });
     }
 
-    private File selectorCallback() {
-        return null;
-    }
+
+
+
     // only needed if you like to insert images from local device so the user gets asked for permission to access external storage if needed
 
 
@@ -343,4 +345,30 @@ public class BlogFragment extends Fragment {
 
 
 }
+
+
+
+    @Override
+    public String invoke(String s) {
+        Log.e("HTIS IS KILLING ME","invole has beGUNN ***********************");
+        final String[] imageUrl = new String[1];
+        StorageReference path = storageRef.child("blog_images").child(uri.getLastPathSegment());
+        path.putFile(Uri.parse(s)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                if (taskSnapshot.getMetadata() != null) {
+                    if (taskSnapshot.getMetadata().getReference() != null) {
+                        Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                        result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                imageUrl[0] = uri.toString();
+                            }
+                        });
+                    }
+                }
+            }
+        });
+        return imageUrl[0];
+    }
 }

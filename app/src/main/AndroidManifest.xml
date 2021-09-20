@@ -13,7 +13,8 @@
         android:theme="@style/MADPROJECT.Blue">
         <activity
             android:name=".BlogPostActivity"
-            android:theme="@style/MADPROJECT.Blue"/>
+            android:theme="@style/MADPROJECT.Blue"
+            android:parentActivityName=".HomeActivity"/>
         <!-- <activity android:name=".HomeActivity"></activity> -->
         <activity android:name=".Landing_Page" />
         <activity android:name=".Login" />
