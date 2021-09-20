@@ -1,22 +1,13 @@
 package com.example.madproject;
 
+
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-
 import android.os.Environment;
-import android.os.Message;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
@@ -26,35 +17,33 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
-import static android.app.Activity.RESULT_OK;
-
 import net.dankito.richtexteditor.android.RichTextEditor;
 import net.dankito.richtexteditor.android.toolbar.GroupedCommandsEditorToolbar;
-import net.dankito.richtexteditor.callback.DidHtmlChangeListener;
 import net.dankito.richtexteditor.callback.GetCurrentHtmlCallback;
-import net.dankito.richtexteditor.command.ToolbarCommand;
 import net.dankito.richtexteditor.model.DownloadImageConfig;
 import net.dankito.richtexteditor.model.DownloadImageUiSetting;
 import net.dankito.utils.android.permissions.IPermissionsService;
@@ -62,7 +51,17 @@ import net.dankito.utils.android.permissions.PermissionsService;
 
 import org.jetbrains.annotations.NotNull;
 
+
 import kotlin.jvm.functions.Function1;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+
+import static android.app.Activity.RESULT_OK;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -83,12 +82,13 @@ public class BlogFragment extends Fragment implements Function1<String,String>{
     //Blog stuff
     private EditText blogTitle;
     private EditText blogStory;
-    private ImageButton blogImage;
+    private ImageView blogImage;
     private Button publishBlog;
     private StorageReference storageRef;
     private DatabaseReference dbRef;
     private FirebaseUser currentUser;
     private DatabaseReference dbUsersRef;
+    private FirebaseFirestore db;
 
     private final int IMAGE_REQUEST = 1;
     static int reqCode=1;
@@ -145,6 +145,7 @@ public class BlogFragment extends Fragment implements Function1<String,String>{
         dbRef = FirebaseDatabase.getInstance().getReference().child("blog");
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         dbUsersRef = FirebaseDatabase.getInstance().getReference().child("users");
+        db=FirebaseFirestore.getInstance();
 
         //Image button Listener
         blogImage.setOnClickListener(new View.OnClickListener() {
@@ -221,9 +222,11 @@ public class BlogFragment extends Fragment implements Function1<String,String>{
         editor.setEditorFontSize(20);
         editor.setPadding((4 * (int) getResources().getDisplayMetrics().density));
 
+
         // some properties you also can set on editor
           editor.setPadding(10);
           editor.setPlaceholder("Type your story here");
+          editor.setHtml("<p>Type your story here</p>");
 
 
 //        editor.setEditorFontColor(Color.MAGENTA)
@@ -274,7 +277,7 @@ public class BlogFragment extends Fragment implements Function1<String,String>{
 
     private void saveHtml(String html) {
         // ...
-        Log.d("A FUCKING ERROR",html);
+
 
         Toast.makeText(getContext(), "Publishing", Toast.LENGTH_SHORT).show();
         //Fetch input values
@@ -308,7 +311,38 @@ public class BlogFragment extends Fragment implements Function1<String,String>{
                                     Toast.makeText(getActivity(), "Published successfully", Toast.LENGTH_SHORT).show();
                                     final DatabaseReference blog = dbRef.push();
 
-                                    dbUsersRef.addValueEventListener(new ValueEventListener() {
+            //Firestore implementation
+                                    // Create a blog Firestore map
+                                    Map<String, Object> blogPost = new HashMap<>();
+                                    blogPost.put("blogImage", imageUrl);
+                                    blogPost.put("blogTitle", blog_title);
+                                    blogPost.put("blogStory",html);
+                                    blogPost.put("UserId", currentUser.getUid());
+                                    blogPost.put("uploadDate",currentDate);
+                                    blogPost.put("uploadTime",currentTime);
+
+
+                                    //store in Firestore
+                                    db.collection("blogPost")
+                                            .add(blogPost)
+                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                @Override
+                                                public void onSuccess(DocumentReference documentReference) {
+                                                    //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                                    Toast.makeText(getActivity(), "Blog posted successfully", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(getActivity(), HomeActivity.class);
+                                                    startActivity(intent);
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    //Log.w(TAG, "Error adding document", e);
+                                                    Toast.makeText(getActivity(), "Blog posted failed", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+
+                                   /*dbUsersRef.addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot snapshot) {
                                             blog.child("blogTitle").setValue(blog_title);
@@ -332,7 +366,7 @@ public class BlogFragment extends Fragment implements Function1<String,String>{
                                         @Override
                                         public void onCancelled(DatabaseError error) {
                                         }
-                                    });
+                                    });*/
                                 }
                             });
 

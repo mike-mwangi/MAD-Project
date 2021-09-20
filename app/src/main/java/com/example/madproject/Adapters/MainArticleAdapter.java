@@ -42,11 +42,11 @@ public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.
 		
 		mainArticleViewHolder.tvTopic.setText(article.getTopic());
 		
-		mainArticleViewHolder.tvTitle.setText(article.getTitle());
-		mainArticleViewHolder.tvAuthor.setText(article.getAuthor());
+		mainArticleViewHolder.tvTitle.setText(article.getBlogTitle());
+		mainArticleViewHolder.tvAuthor.setText(article.getUserId());
 		
-		mainArticleViewHolder.tvDuration.setText(article.getDuration());
-		mainArticleViewHolder.tvTimeStamp.setText(article.getTimestamp());
+		mainArticleViewHolder.tvDuration.setText(article.getUploadDate());
+		mainArticleViewHolder.tvTimeStamp.setText(article.getUploadTime());
 		
 		if (article.isPremium()) {
 			mainArticleViewHolder.tvPremium.setVisibility(View.VISIBLE);
@@ -55,7 +55,7 @@ public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.
 		}
 		
 		Glide.with(context)
-			.load(article.getArticleImage())
+			.load(article.getBlogImage())
 			.into(mainArticleViewHolder.imgArticlePic);
 		
 		Glide.with(context)
@@ -101,7 +101,9 @@ public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.
 			itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					view.getContext().startActivity(new Intent(view.getContext(), BlogPostActivity.class));
+					Intent intent=new Intent(view.getContext(), BlogPostActivity.class);
+					intent.putExtra("articleID",articles.get(getAdapterPosition()).getBlogID());
+					view.getContext().startActivity(intent);
 				}
 			});
 			

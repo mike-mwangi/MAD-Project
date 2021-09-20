@@ -16,10 +16,11 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_margin="0dp"
-        android:background="@mipmap/placeholderblogimage_foreground"
-        android:src="@mipmap/placeholderblogimage_foreground"
+
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="fitXY"
+        />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/blog_title"
@@ -61,16 +62,17 @@
         android:text=" 27.5k"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/show_comments_btn"
-        android:onClick="showComments"
-        android:src="@drawable/ic_baseline_comment_24"
-        app:layout_constraintStart_toEndOf="@id/like"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="5dp"
-        />
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/show_comments_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:button="@drawable/ic_baseline_comment_24"
+            android:onClick="showComments"
+            android:text=" 15 comments"
+            app:layout_constraintStart_toEndOf="@id/like"
+            app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

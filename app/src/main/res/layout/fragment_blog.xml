@@ -11,14 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-        <ImageButton
+
+        <ImageView
             android:id="@+id/blogImage"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="200dp"
-            android:layout_marginBottom="20dp"
             android:contentDescription="@string/insert_blog_image"
-            android:src="@drawable/ic_baseline_insert_photo"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:src="@drawable/insert_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="fitXY"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/blogTitle"
@@ -29,6 +32,7 @@
             android:layout_marginBottom="20dp"
             android:inputType="text"
             app:layout_constraintTop_toBottomOf="@id/blogImage"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -39,7 +43,7 @@
         <net.dankito.richtexteditor.android.RichTextEditor
             android:id="@+id/editor"
             android:layout_width="match_parent"
-            android:layout_height="167dp"
+            android:layout_height="200dp"
             android:layout_marginBottom="40dp"
             android:gravity="top|left"
             android:hint="Type story here"
@@ -51,18 +55,21 @@
         <net.dankito.richtexteditor.android.toolbar.GroupedCommandsEditorToolbar
             android:id="@+id/editorToolbar"
             android:layout_width="match_parent"
+            android:layout_margin="5dp"
             android:layout_height="36dp"
             app:layout_constraintTop_toBottomOf="@id/editor"
             app:layout_constraintStart_toStartOf="parent"
+            android:background="@color/owl_blue_700"
             />
+
         <Button
             android:id="@+id/publishBlog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/publish"
             android:layout_gravity="center"
-            app:layout_constraintTop_toBottomOf="@id/editorToolbar"
+            android:layout_marginStart="156dp"
+            android:text="@string/publish"
             app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintTop_toBottomOf="@id/editorToolbar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

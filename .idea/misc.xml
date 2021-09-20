@@ -16,7 +16,7 @@
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.209375" />
         <entry key="app/src/main/res/drawable/ic_baseline_comment_24.xml" value="0.10520833333333333" />
         <entry key="app/src/main/res/font/quicksand.xml" value="0.12314814814814815" />
-        <entry key="app/src/main/res/layout/activity_blog_post.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_blog_post.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_landing_page.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.22" />
@@ -34,6 +34,7 @@
         <entry key="app/src/main/res/layout/main_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/step_item.xml" value="0.1" />
         <entry key="app/src/main/res/menu/main_screen_options.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/uploadIMage.xml" value="0.10520833333333333" />
       </map>
     </option>
   </component>

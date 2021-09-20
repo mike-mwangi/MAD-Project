@@ -4,76 +4,80 @@ import java.io.Serializable;
 
 public class Article implements Serializable {
 	
-	private String articleImage;
+	private String blogImage;
+	private String blogStory;
 	private String authorProfilePic;
-	private String author;
-	private String title;
-	private String duration;
+	private String UserId;
+	private String blogTitle;
+	private String uploadDate;
 	private boolean premium;
 	private String topic;
-	private String timestamp;
-	
-	
-	public Article(String articleImage, String authorProfilePic, String author, String title, String duration, boolean premium) {
-		this.articleImage = articleImage;
-		this.authorProfilePic = authorProfilePic;
-		this.author = author;
-		this.title = title;
-		this.duration = duration;
-		this.premium = premium;
+	private String uploadTime;
+	private String blogID;
+
+	public String getBlogStory() {
+		return blogStory;
+	}
+
+	public void setBlogStory(String blogStory) {
+		this.blogStory = blogStory;
+	}
+
+	public Article() {
+
 	}
 	
 	public Article(String articleImage, String authorProfilePic, String author, String title, String duration, boolean premium, String topic, String timestamp) {
-		this.articleImage = articleImage;
+		this.blogImage = articleImage;
 		this.authorProfilePic = authorProfilePic;
-		this.author = author;
-		this.title = title;
-		this.duration = duration;
+		this.UserId = author;
+		this.blogTitle = title;
+		this.uploadDate = duration;
 		this.premium = premium;
 		this.topic = topic;
-		this.timestamp = timestamp;
+		this.uploadTime = timestamp;
 	}
 	
 	public Article(String articleImage, String authorProfilePic, String author, String title, String duration, boolean premium, String timestamp) {
-		this.articleImage = articleImage;
+		this.blogImage = articleImage;
 		this.authorProfilePic = authorProfilePic;
-		this.author = author;
-		this.title = title;
-		this.duration = duration;
+		this.UserId = author;
+		this.blogTitle = title;
+		this.uploadDate = duration;
 		this.premium = premium;
-		this.timestamp = timestamp;
+		this.uploadTime = timestamp;
 	}
 	
-	public String getAuthor() {
-		return author;
+	public String getUserId() {
+		return UserId;
 	}
 	
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setUserId(String userId) {
+		this.UserId = userId;
 	}
 	
-	public String getTitle() {
-		return title;
+	public String getBlogTitle() {
+		return blogTitle;
 	}
 	
-	public void setTitle(String title) {
-		this.title = title;
+	public void setBlogTitle(String blogTitle) {
+		this.blogTitle = blogTitle;
 	}
 	
-	public String getDuration() {
-		return duration;
+	public String getUploadDate() {
+		return uploadDate;
 	}
 	
-	public void setDuration(String duration) {
-		this.duration = duration;
+	public void setUploadDate(String uploadDate) {
+		this.uploadDate = uploadDate;
 	}
 	
-	public String getArticleImage() {
-		return articleImage;
+	public String getBlogImage() {
+		return blogImage;
 	}
 	
-	public void setArticleImage(String articleImage) {
-		this.articleImage = articleImage;
+	public void setBlogImage(String blogImage) {
+		this.blogImage = blogImage;
 	}
 	
 	public String getAuthorProfilePic() {
@@ -100,11 +104,19 @@ public class Article implements Serializable {
 		this.premium = premium;
 	}
 	
-	public void setTimestamp(String timestamp) {
-		this.timestamp = timestamp;
+	public void setUploadTime(String uploadTime) {
+		this.uploadTime = uploadTime;
 	}
 	
-	public String getTimestamp() {
-		return timestamp;
+	public String getUploadTime() {
+		return uploadTime;
+	}
+
+	public String getBlogID() {
+		return blogID;
+	}
+	public void setBlogID(String blogID){
+		this.blogID=blogID;
+
 	}
 }

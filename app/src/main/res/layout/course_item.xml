@@ -95,7 +95,9 @@
         android:paddingStart="@dimen/grid_2"
         app:srcCompat="@drawable/ic_course"
         app:tint="?attr/colorPrimary"
-        android:importantForAccessibility="no"/>
+        android:importantForAccessibility="no"
+        android:paddingLeft="@dimen/grid_2"
+        tools:ignore="VectorDrawableCompat" />
 
     <TextView
         android:id="@+id/tvTitle"
@@ -169,7 +171,9 @@
       app:drawableStartCompat="@drawable/ic_star"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/tvTimeStamp"
-      tools:ignore="UseCompatTextViewDrawableXml" />
+      tools:ignore="UseCompatTextViewDrawableXml"
+      android:layout_marginLeft="6dp"
+      android:layout_toRightOf="@id/tvDuration" />
 
   <TextView
       android:id="@+id/tvDuration"
