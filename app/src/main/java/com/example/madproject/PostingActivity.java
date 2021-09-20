@@ -1,26 +1,18 @@
 package com.example.madproject;
 
-import androidx.annotation.NonNull;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
-import androidx.viewpager2.adapter.FragmentViewHolder;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Adapter;
-
-import com.example.madproject.Adapters.BlogPostAdapter;
+import com.example.madproject.Adapters.PostAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class PostingActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager2 viewPager2;
-    BlogPostAdapter adapter;
+    PostAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +25,7 @@ public class PostingActivity extends AppCompatActivity {
 
 
         FragmentManager fm = getSupportFragmentManager();
-        adapter = new BlogPostAdapter(fm,getLifecycle());
+        adapter = new PostAdapter(fm,getLifecycle());
 
         viewPager2.setAdapter(adapter);
 

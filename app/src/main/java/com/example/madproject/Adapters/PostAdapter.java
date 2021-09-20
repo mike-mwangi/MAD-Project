@@ -10,10 +10,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.example.madproject.AudioFragment;
 import com.example.madproject.BlogFragment;
 
-public class BlogPostAdapter extends FragmentStateAdapter {
+public class PostAdapter extends FragmentStateAdapter {
 
 
-    public BlogPostAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+    public PostAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
     }
 
