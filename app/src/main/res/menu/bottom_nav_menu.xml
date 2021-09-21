@@ -4,15 +4,14 @@
     <item android:id="@+id/home"
         android:title="Explore"
         android:icon="@drawable/ic_baseline_explore_24" />
-
     <item android:id="@+id/blog"
-        android:title="Written Blogs"
+        android:title="Blogs"
         android:icon="@drawable/ic_blog" />
     <item android:id="@+id/audio"
-        android:title="Audio Blogs"
+        android:title="Audio"
         android:icon="@drawable/ic_audio" />
     <item android:id="@+id/blogsWithAudio"
-        android:title="Blogs with audio"
+        android:title="Blogs/Audio"
         android:icon="@drawable/ic_baseline_airplay_24" />
 
     <item android:id="@+id/myPosts"

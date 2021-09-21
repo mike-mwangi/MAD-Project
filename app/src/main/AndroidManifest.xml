@@ -11,9 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MADPROJECT.Blue">
+
         <activity
             android:name=".SingleAudioActivity"
             android:exported="true" />
+
+<!--        <activity android:name=".SplashScreenActivity"></activity>-->
+        <activity android:name=".MainActivity"
+            android:theme="@style/landingScreenTheme">
+        </activity>
+
+
         <activity android:name=".ProfileActivity"></activity>
         <activity
             android:name=".BlogPostActivity"
@@ -30,9 +38,9 @@
             android:name=".HomeActivity"
             android:theme="@style/MADPROJECT.Blue" />
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashScreenActivity"
             android:exported="true"
-            android:theme="@style/MADPROJECT.Blue">
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -124,18 +124,32 @@
 
         />
 
-    <com.google.android.material.imageview.ShapeableImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgAuthorProfilePic"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="35dp"
         android:importantForAccessibility="no"
+        android:contentDescription="@string/insert_blog_image"
         android:src="@mipmap/placeholderblogimage_foreground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/card_blog_title"
         app:layout_constraintTop_toBottomOf="@id/card_blog_title"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.Owl.roundedImabe" />
+        />
+
+<!--    <com.google.android.material.imageview.ShapeableImageView-->
+<!--        android:id="@+id/imgAuthorProfilePic"-->
+<!--        android:layout_width="35dp"-->
+<!--        android:layout_height="35dp"-->
+<!--        android:layout_marginEnd="32dp"-->
+<!--        android:importantForAccessibility="no"-->
+<!--        android:src="@mipmap/placeholderblogimage_foreground"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="@id/card_blog_title"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/card_blog_title"-->
+<!--        app:shapeAppearanceOverlay="@style/ShapeAppearance.Owl.roundedImabe" />-->
 
     <View
         android:id="@+id/highlight"

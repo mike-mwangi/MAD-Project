@@ -3,11 +3,17 @@ package com.example.madproject;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -33,6 +39,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import androidx.appcompat.widget.ShareActionProvider;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.model.Document;
 
@@ -43,14 +50,17 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class BlogPostActivity extends AppCompatActivity {
     ImageView blogImage;
+    private Toolbar toolbar;
     MaterialTextView blogTitle;
     WebView storyView;
     RecyclerView commentRecyclerView;
     TextInputEditText commentInput;
     MaterialButton postComment;
-    ShapeableImageView authorImage;
+    CircleImageView authorImage;
     MaterialTextView authorName;
     private Article article;
     private CommentAdapter commentAdapter;
@@ -63,6 +73,11 @@ public class BlogPostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blog_post);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("My Hadithi");
+
         Intent intent = getIntent();
         String articleID = intent.getStringExtra("articleID");
         blogImage=findViewById(R.id.blog_image);
@@ -77,8 +92,6 @@ public class BlogPostActivity extends AppCompatActivity {
         commentAdapter = new CommentAdapter(this);
         commentRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         commentRecyclerView.setAdapter(commentAdapter);
-
-
 
         setContents(articleID);
         postComment.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +119,15 @@ public class BlogPostActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void shareText(View view) {
+        Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        String shareBodyText = "Your shearing message goes here";
+        intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject/Title");
+        intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
+        startActivity(Intent.createChooser(intent, "Choose sharing method"));
     }
 
 
@@ -163,5 +185,39 @@ public class BlogPostActivity extends AppCompatActivity {
 
    */
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.blog_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // We are using switch case because multiple icons can be kept
+        switch (item.getItemId()) {
+            case R.id.shareButton:
+
+                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+
+                // type of the content to be shared
+                sharingIntent.setType("text/plain");
+
+                // Body of the content
+                String shareBody = "Your Body Here";
+
+                // subject of the content. you can share anything
+                String shareSubject = "Your Subject Here";
+
+                // passing body of the content
+                sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+
+                // passing subject of the content
+                sharingIntent.putExtra(Intent.EXTRA_SUBJECT, shareSubject);
+                startActivity(Intent.createChooser(sharingIntent, "Share using"));
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }
