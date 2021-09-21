@@ -48,7 +48,8 @@
     <string name="email_prof">Email</string>
     <string name="phone_number_prof">Phone Number</string>
     <string name="update_details_profilr">Update Details</string>
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

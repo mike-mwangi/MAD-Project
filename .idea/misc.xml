@@ -25,6 +25,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_posting.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.41196777905638665" />
+        <entry key="app/src/main/res/layout/activity_single_audio.xml" value="0.25" />
         <entry key="app/src/main/res/layout/article_item.xml" value="0.6033690658499234" />
         <entry key="app/src/main/res/layout/comment_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/comment_item_view.xml" value="0.19322916666666667" />
@@ -32,7 +33,9 @@
         <entry key="app/src/main/res/layout/featured_item.xml" value="0.1621376811594203" />
         <entry key="app/src/main/res/layout/fragment_article_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_audio.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_audio_list.xml" value="0.18342391304347827" />
         <entry key="app/src/main/res/layout/fragment_blog.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_blog_list.xml" value="0.18342391304347827" />
         <entry key="app/src/main/res/layout/fragment_lessons_sheet.xml" value="0.18" />
         <entry key="app/src/main/res/layout/main_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/step_item.xml" value="0.1" />

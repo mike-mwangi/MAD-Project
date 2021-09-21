@@ -7,21 +7,20 @@ import java.util.Date;
 public class Comment {
     private String userID;
     private String commentText;
-    @ServerTimestamp
-    Date date;
+    String date;
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
     public Comment() {
     }
 
-    public Comment(String userID, String commentText, Date date) {
+    public Comment(String userID, String commentText, String date) {
         this.userID = userID;
         this.commentText = commentText;
         this.date = date;

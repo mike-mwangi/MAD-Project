@@ -15,7 +15,8 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_height="0dp"
         android:layout_width="match_parent"
-        app:layout_constraintBottom_toTopOf="@id/bottom_nav"
+        android:id="@+id/app_bar"
+
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         >
@@ -24,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:liftOnScroll="true"
-            app:liftOnScrollTargetViewId="@id/list"
+            app:liftOnScrollTargetViewId="@id/fragment_placeholder"
             android:theme="@style/ThemeOverlay.MADPROJECT.light">
 
             <androidx.appcompat.widget.Toolbar
@@ -37,16 +38,20 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:scrollbars="vertical"
-            tools:listitem="@layout/course_item"/>
+
+
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_placeholder"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_bar"
+        app:layout_constraintBottom_toTopOf="@id/bottom_nav"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
 
@@ -15,11 +16,13 @@ import com.bumptech.glide.Glide;
 import com.example.madproject.Adapters.CommentAdapter;
 import com.example.madproject.Models.Article;
 import com.example.madproject.Models.Comment;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -27,12 +30,18 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.model.Document;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BlogPostActivity extends AppCompatActivity {
     ImageView blogImage;
@@ -45,6 +54,9 @@ public class BlogPostActivity extends AppCompatActivity {
     MaterialTextView authorName;
     private Article article;
     private CommentAdapter commentAdapter;
+    private DocumentReference article1;
+    private Article articleObject;
+    private ArrayList<Comment> comments;
 
 
     @Override
@@ -68,29 +80,54 @@ public class BlogPostActivity extends AppCompatActivity {
 
 
 
-
         setContents(articleID);
+        postComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat cDate = new SimpleDateFormat("MM/dd/yyyy");
+                final String currentDate = cDate.format(calendar.getTime());
+
+                Map<String, Object> commentPost = new HashMap<>();
+                commentPost.put("userID", FirebaseAuth.getInstance().getUid());
+                commentPost.put("commentText",commentInput.getText().toString());
+                commentPost.put("date",currentDate);
+                Comment comment=new Comment();
+                comment.setCommentText(commentInput.getText().toString());
+                comment.setUserID(FirebaseAuth.getInstance().getUid());
+                comment.setDate(currentDate);
+                article1.update("Comments", FieldValue.arrayUnion(commentPost)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+
+                        commentAdapter.notifyDataSetChanged();
+                    }
+                });
+
+            }
+        });
     }
 
 
     private void setContents(String articleID) {
-        DocumentReference article= FirebaseFirestore.getInstance().collection("blogPost").document(articleID);
-        article.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        article1 = FirebaseFirestore.getInstance().collection("blogPost").document(articleID);
+        article1.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                Article article1 = value.toObject(Article.class);
+                articleObject = value.toObject(Article.class);
 
                 storyView.getSettings().setJavaScriptEnabled(true);
 
                 Glide.with(BlogPostActivity.this.getApplicationContext())
-                        .load(article1.getBlogImage())
+                        .load(articleObject.getBlogImage())
                 .into(blogImage);
 
-                commentAdapter.setComments(article1.getComments());
-                storyView.loadData(article1.getBlogStory(), "text/html; charset=utf-8", "UTF-8");
-                blogTitle.setText(article1.getBlogTitle());
+                comments = articleObject.getComments();
+                commentAdapter.setComments(comments);
+                storyView.loadData(articleObject.getBlogStory(), "text/html; charset=utf-8", "UTF-8");
+                blogTitle.setText(articleObject.getBlogTitle());
 
-                FirebaseDatabase.getInstance().getReference("users").child(article1.getUserId()).addValueEventListener(new ValueEventListener() {
+                FirebaseDatabase.getInstance().getReference("users").child(articleObject.getUserId()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         UserHelper value1 = snapshot.getValue(UserHelper.class);

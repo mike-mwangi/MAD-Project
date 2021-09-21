@@ -6,16 +6,21 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.madproject.Adapters.MainArticleAdapter;
 import com.example.madproject.Models.Article;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -38,6 +43,8 @@ public class HomeActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FloatingActionButton fab;
     ProgressDialog progressDialog;
+    private FragmentTransaction ft;
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,19 +52,45 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         //Ensure user doesn't have a blank screen while recycler view fetches posts
-        progressDialog=new ProgressDialog(this);
+      /*  progressDialog=new ProgressDialog(this);
         progressDialog.setCancelable(true);
         progressDialog.setMessage("Fetching Posts....");
         progressDialog.show();
 
+       */
+
         //Initialize views and data structures
         initialize();
+        ft = getSupportFragmentManager().beginTransaction();
+        BlogListFragment blogListFragment=BlogListFragment.newInstance();
+        ft.replace(R.id.fragment_placeholder, blogListFragment);
+        ft.commit();
+        bottomNavigationView=findViewById(R.id.bottom_nav);
 
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.home:
+                        ft = getSupportFragmentManager().beginTransaction();
+                        BlogListFragment blogListFragment=BlogListFragment.newInstance();
+                        ft.replace(R.id.fragment_placeholder, blogListFragment);
+                        ft.commit();
+                        break;
+                    case R.id.audio:
+                        ft = getSupportFragmentManager().beginTransaction();
+                        AudioListFragment audioListFragment=AudioListFragment.newInstance();
+                        ft.replace(R.id.fragment_placeholder, audioListFragment);
+                        ft.commit();
+                        break;
+
+                }
+                return true;
+    }
+});
 
 
         //Populate main feed and set adapter
-        populateMainFeedArticles();
-        mainArticleAdapter.notifyDataSetChanged();
 
         //Open the new blog/audio content page
         fab.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +101,9 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+
+
+
     }
 
 
@@ -78,14 +114,10 @@ public class HomeActivity extends AppCompatActivity {
 
         //toolbar.setTitle("Home");
 
+
         fab=findViewById(R.id.fab);
-        db=FirebaseFirestore.getInstance();
-        mainFeedArticles = new ArrayList<>();
 
-        rvMainFeed = findViewById(R.id.list);
-      rvMainFeed.setLayoutManager(new LinearLayoutManager(HomeActivity.this));
 
-        mainArticleAdapter = new MainArticleAdapter(HomeActivity.this, mainFeedArticles);
 
        fab.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -96,8 +128,7 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-
-    private void populateMainFeedArticles() {
+   private void populateMainFeedArticles() {
        /* mainFeedArticles.add(new Article(articleImages[0], authorImages[0], "Florin Pop", "How to create a Countdown component using React & MomentJS", "4 min read", true, "Based on your reading history", "3/20/2018"));
         mainFeedArticles.add(new Article(articleImages[3], authorImages[3], "Robert Roy Britt", "Coffee, Even a Lot, Linked to Longer Life", "6 min read", true,"Life", "6 days ago"));
         mainFeedArticles.add(new Article(articleImages[2], authorImages[2], "Paolo Rotolo", "Exploring new Coroutines and Lifecycle Architectural Components integration on Android", "7 min read", false, "Programming", "6 days ago"));
@@ -132,6 +163,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
