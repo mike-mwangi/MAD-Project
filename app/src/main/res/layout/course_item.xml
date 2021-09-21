@@ -14,19 +14,18 @@
   -->
 
 
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
+    android:layout_marginStart="10dp"
     android:layout_marginTop="10dp"
-    android:layout_marginStart="32dp"
     android:layout_marginEnd="5dp"
+    android:layout_marginBottom="10dp"
     app:cardCornerRadius="10dp"
 
-  >
+    >
 
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,151 +37,164 @@
       >
 
 
-
     <View
         android:id="@+id/background"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/card_blog_author"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvTopic"
-        app:layout_constraintBottom_toBottomOf="@id/tvTitle"
-        app:layout_constraintStart_toStartOf="@id/tvTopic"
-        />
+        app:layout_constraintStart_toStartOf="@id/card_blog_title"
+        app:layout_constraintTop_toTopOf="@id/card_blog_title" />
 
     <Space
         android:id="@+id/space"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintEnd_toStartOf="@id/imgArticleThumbnail"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/imgArticleThumbnail"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imgArticleThumbnail"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintStart_toEndOf="@id/space"
-        app:layout_constraintEnd_toStartOf="@id/tvTopic"
-        app:layout_constraintTop_toTopOf="@id/tvTopic"
-        app:layout_constraintBottom_toBottomOf="@id/tvTitle"
-        app:layout_constraintDimensionRatio="1:1"
-        app:srcCompat="@drawable/stroked_course_image_placeholder"
         android:scaleType="centerCrop"
-        />
+        android:src="@mipmap/upload_image_foreground"
+        app:layout_constraintBottom_toBottomOf="@id/card_blog_date"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@id/card_blog_title"
+
+        app:layout_constraintStart_toEndOf="@id/space"
+        app:layout_constraintTop_toTopOf="@id/card_blog_title" />
 
     <TextView
-        android:id="@+id/tvTopic"
+        android:id="@+id/card_blog_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/imgArticleThumbnail"
-        app:layout_constraintTop_toTopOf="parent"
+        android:ellipsize="end"
+        android:lines="2"
+        android:paddingHorizontal="@dimen/grid_2"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
+        android:text="My Title 1"
+        android:textAppearance="?attr/textAppearanceSubtitle2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="1"
-        android:paddingHorizontal="@dimen/grid_2"
-        android:paddingTop="@dimen/grid_2"
-        android:lines="2"
-        android:ellipsize="end"
-        android:textAppearance="?attr/textAppearanceSubtitle1"
-        />
+        app:layout_constraintStart_toEndOf="@id/imgArticleThumbnail"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/course_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/tvTopic"
-        app:layout_constraintTop_toTopOf="@id/tvTitle"
-        app:layout_constraintBottom_toBottomOf="@id/tvTitle"
+        android:importantForAccessibility="no"
         android:paddingStart="@dimen/grid_2"
+        android:paddingLeft="@dimen/grid_2"
+        app:layout_constraintBottom_toBottomOf="@id/card_blog_author"
+        app:layout_constraintStart_toStartOf="@id/card_blog_title"
+        app:layout_constraintTop_toTopOf="@id/card_blog_author"
         app:srcCompat="@drawable/ic_course"
         app:tint="?attr/colorPrimary"
-        android:importantForAccessibility="no"
-        android:paddingLeft="@dimen/grid_2"
         tools:ignore="VectorDrawableCompat" />
 
     <TextView
-        android:id="@+id/tvTitle"
+        android:id="@+id/card_blog_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingStart="@dimen/grid_2"
+        android:paddingBottom="5dp"
+        android:text="ON : 10/2/2021 : 6:30"
+        android:textAppearance="@style/TextAppearance.Owl.Caption"
         app:layout_constraintStart_toEndOf="@id/course_icon"
-        app:layout_constraintEnd_toStartOf="@id/imgAuthorProfilePic"
-        app:layout_constraintTop_toBottomOf="@id/tvTopic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:paddingStart="@dimen/grid_1"
+        app:layout_constraintTop_toBottomOf="@id/card_blog_author" />
+
+    <TextView
+        android:id="@+id/card_blog_author"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:paddingVertical="@dimen/grid_2"
-        android:textColor="?attr/colorPrimary"
+        android:paddingStart="@dimen/grid_1"
+        android:text=" Authored By : Michelle Obama"
         android:textAppearance="?attr/textAppearanceCaption"
-     />
+        android:textColor="?attr/colorPrimary"
 
-  <ImageView
-      android:id="@+id/imgAuthorProfilePic"
-      android:layout_width="28dp"
-      android:layout_height="28dp"
-      android:layout_marginEnd="@dimen/grid_2"
-      android:importantForAccessibility="no"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toEndOf="@id/tvTopic"
+        app:layout_constraintEnd_toStartOf="@id/imgAuthorProfilePic"
+        app:layout_constraintStart_toEndOf="@id/course_icon"
+        app:layout_constraintTop_toBottomOf="@id/card_blog_title"
 
-      app:layout_constraintTop_toBottomOf="@id/tvTopic" />
+        />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imgAuthorProfilePic"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="32dp"
+        android:importantForAccessibility="no"
+        android:src="@mipmap/placeholderblogimage_foreground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/card_blog_title"
+        app:layout_constraintTop_toBottomOf="@id/card_blog_title"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Owl.roundedImabe" />
 
     <View
         android:id="@+id/highlight"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="@id/imgArticleThumbnail"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:foreground="@drawable/small_component_foreground"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:foreground="@drawable/small_component_foreground"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/imgArticleThumbnail"
+        app:layout_constraintTop_toTopOf="parent" />
 
-  <TextView
-      android:id="@+id/tvAuthor"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:ellipsize="end"
-      android:maxLines="1"
-      android:text="@string/author_name"
+    <TextView
+        android:id="@+id/tvAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="authored By James John"
 
-      android:visibility="gone"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/highlight" />
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/highlight" />
 
-  <TextView
-      android:id="@+id/tvTimeStamp"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_below="@id/tvAuthor"
-      android:text="@string/article_date"
-      android:visibility="gone"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/tvAuthor" />
+    <TextView
+        android:id="@+id/tvTimeStamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvAuthor"
+        android:text="@string/article_date"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvAuthor" />
 
-  <TextView
-      android:id="@+id/imgPremium"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_below="@id/tvAuthor"
-      android:layout_marginStart="6dp"
-      android:layout_toEndOf="@id/tvDuration"
-      android:drawableStart="@drawable/ic_star"
-      android:drawableLeft="@drawable/ic_star"
-      android:visibility="gone"
-      app:drawableLeftCompat="@drawable/ic_star"
-      app:drawableStartCompat="@drawable/ic_star"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/tvTimeStamp"
-      tools:ignore="UseCompatTextViewDrawableXml"
-      android:layout_marginLeft="6dp"
-      android:layout_toRightOf="@id/tvDuration" />
+    <TextView
+        android:id="@+id/imgPremium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvAuthor"
+        android:layout_marginStart="6dp"
+        android:layout_marginLeft="6dp"
+        android:layout_toEndOf="@id/tvDuration"
+        android:layout_toRightOf="@id/tvDuration"
+        android:drawableStart="@drawable/ic_star"
+        android:drawableLeft="@drawable/ic_star"
+        android:visibility="gone"
+        app:drawableLeftCompat="@drawable/ic_star"
+        app:drawableStartCompat="@drawable/ic_star"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTimeStamp"
+        tools:ignore="UseCompatTextViewDrawableXml" />
 
-  <TextView
-      android:id="@+id/tvDuration"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="@string/read_duration"
-      android:visibility="gone"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/imgPremium" />
+    <TextView
+        android:id="@+id/tvDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/read_duration"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgPremium" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -15,6 +15,11 @@ import com.bumptech.glide.Glide;
 import com.example.madproject.BlogPostActivity;
 import com.example.madproject.Models.Article;
 import com.example.madproject.R;
+import com.example.madproject.UserHelper;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -39,28 +44,28 @@ public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.
 	public void onBindViewHolder(@NonNull MainArticleViewHolder mainArticleViewHolder, int i) {
 		
 		Article article = articles.get(i);
-		
-		mainArticleViewHolder.tvTopic.setText(article.getTopic());
-		
-		mainArticleViewHolder.tvTitle.setText(article.getBlogTitle());
-		mainArticleViewHolder.tvAuthor.setText(article.getUserId());
-		
-		mainArticleViewHolder.tvDuration.setText(article.getUploadDate());
-		mainArticleViewHolder.tvTimeStamp.setText(article.getUploadTime());
-		
-		if (article.isPremium()) {
-			mainArticleViewHolder.tvPremium.setVisibility(View.VISIBLE);
-		} else  {
-			mainArticleViewHolder.tvPremium.setVisibility(View.GONE);
-		}
+		mainArticleViewHolder.blogTitle.setText(article.getBlogTitle());
+		mainArticleViewHolder.blogDate.setText("uploaded on :"+article.getUploadDate());
+		FirebaseDatabase.getInstance().getReference("users").child(article.getUserId()).addValueEventListener(new ValueEventListener() {
+			@Override
+			public void onDataChange(@NonNull DataSnapshot snapshot) {
+				UserHelper value = snapshot.getValue(UserHelper.class);
+				mainArticleViewHolder.blogAuthorName.setText("Authored by : "+ value.getFname());
+				Glide.with(mainArticleViewHolder.itemView.getContext())
+						.load(value.getUserImage())
+						.into(mainArticleViewHolder.imgAuthorPic);
+			}
+
+			@Override
+			public void onCancelled(@NonNull DatabaseError error) {
+
+			}
+		});
+
 		
 		Glide.with(context)
 			.load(article.getBlogImage())
 			.into(mainArticleViewHolder.imgArticlePic);
-		
-		Glide.with(context)
-			.load(article.getAuthorProfilePic())
-			.into(mainArticleViewHolder.imgAuthorPic);
 		
 		
 	}
@@ -74,30 +79,28 @@ public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.
 	}
 	
 	class MainArticleViewHolder extends RecyclerView.ViewHolder {
-		TextView tvTitle;
-		TextView tvAuthor;
-		TextView tvDuration;
-		TextView tvTimeStamp;
-		TextView tvPremium;
-		TextView tvTopic;
+		TextView blogTitle;
+		TextView blogAuthorName;
+		TextView blogDate;
 		
 		ImageView imgArticlePic;
 		ImageView imgAuthorPic;
+		ImageView typeOfContent;
 		
 		
 		MainArticleViewHolder(@NonNull View itemView) {
 			super(itemView);
 			
-			tvTopic = itemView.findViewById(R.id.tvTopic);
-			tvTitle = itemView.findViewById(R.id.tvTitle);
-			tvAuthor = itemView.findViewById(R.id.tvAuthor);
-			tvDuration = itemView.findViewById(R.id.tvDuration);
-			tvTimeStamp = itemView.findViewById(R.id.tvTimeStamp);
+		blogTitle=itemView.findViewById(R.id.card_blog_title);
+		blogAuthorName=itemView.findViewById(R.id.card_blog_author);
+		blogDate=itemView.findViewById(R.id.card_blog_date);
+
 			
 			imgArticlePic = itemView.findViewById(R.id.imgArticleThumbnail);
 			imgAuthorPic = itemView.findViewById(R.id.imgAuthorProfilePic);
-		
-			tvPremium = itemView.findViewById(R.id.imgPremium);
+			typeOfContent=itemView.findViewById(R.id.course_icon);
+
+
 			itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {

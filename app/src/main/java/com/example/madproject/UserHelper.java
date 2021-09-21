@@ -1,7 +1,21 @@
   package com.example.madproject;
 
 public class UserHelper {
-    String fname,email,number,password,username;
+    String fname;
+    String email;
+    String number;
+    String password;
+    String username;
+
+    public String getUserImage() {
+        return userImage;
+    }
+
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
+    }
+
+    String userImage;
 
     public UserHelper() {
 

@@ -6,34 +6,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:targetApi="o">
 
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/author_image"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="40dp"
+        android:src="@mipmap/placeholderblogimage_foreground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Owl.roundedImabe" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/author_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Mohamed Abdirahman"
+        android:textAppearance="@style/TextAppearance.Owl.Overline"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/author_image" />
+
     <ImageView
         android:id="@+id/blog_image"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="300dp"
         android:layout_margin="0dp"
-
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:scaleType="fitXY"
-        />
+        app:layout_constraintTop_toBottomOf="@id/blog_title" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/blog_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:text="This is the blog heading : It can be long"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.Owl.Headline5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/blog_image" />
+        app:layout_constraintTop_toBottomOf="@id/author_name" />
 
     <WebView
         android:id="@+id/story_web_view"
@@ -44,7 +71,7 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/blog_title" />
+        app:layout_constraintTop_toBottomOf="@id/blog_image" />
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,14 +102,41 @@
             app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/comment_input"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:hint="leave a comment"
+        app:layout_constraintEnd_toStartOf="@id/post_comment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottom_items">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/post_comment"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="88dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="8dp"
+        android:text=" Post "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottom_items" />
+
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/comments"
-        app:layout_constraintTop_toBottomOf="@id/bottom_items"
+        app:layout_constraintTop_toBottomOf="@id/comment_input"
         app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/comment_item"
         />
 
 

@@ -144,6 +144,7 @@ public class AudioFragment extends Fragment {
 
         if ((!TextUtils.isEmpty(audioTitle))) {
             StorageReference path = storageRef.child("audio_blogs").child(uri.getLastPathSegment());
+            StorageReference audioPath = storageRef.child("audio_blogs/audio").child(uri.getLastPathSegment());
             path.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -157,38 +158,56 @@ public class AudioFragment extends Fragment {
                                     final String imageUrl = uri.toString();
                                     Toast.makeText(getActivity(), "AudioImage uploaded successfully", Toast.LENGTH_SHORT).show();
                                     //final DatabaseReference audio = dbAudioRef.push();
+                                    audioPath.putFile(audioUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                            if (taskSnapshot.getMetadata() != null) {
+                                                if (taskSnapshot.getMetadata().getReference() != null) {
+                                                    //get download url
+                                                    Task<Uri> audioResult = taskSnapshot.getStorage().getDownloadUrl();
+                                                    audioResult.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                        @Override
+                                                        public void onSuccess(Uri uri) {
+                                                            final String audio = uri.toString();
+                                                            Toast.makeText(getActivity(), "Audio uploaded successfully", Toast.LENGTH_SHORT).show();
+                                                            //final DatabaseReference audio = dbAudioRef.push();
 
-                                    //Firestore implementation
-                                    // Create an audio Firestore map
-                                    Map<String, Object> audioPost = new HashMap<>();
-                                    audioPost.put("audioImage", imageUrl);
-                                    audioPost.put("audioTitle",audioTitle);
-                                    audioPost.put("UserId", currentUser.getUid());
-                                    audioPost.put("uploadDate",currentDate);
-                                    audioPost.put("uploadTime",currentTime);
+                                                            //Firestore implementation
+                                                            // Create an audio Firestore map
+                                                            Map<String, Object> audioPost = new HashMap<>();
+                                                            audioPost.put("audioImage", imageUrl);
+                                                            audioPost.put("audioTitle", audioTitle);
+                                                            audioPost.put("audio",audio);
+                                                            audioPost.put("UserId", currentUser.getUid());
+                                                            audioPost.put("uploadDate", currentDate);
+                                                            audioPost.put("uploadTime", currentTime);
 
 
-                                    //store in Firestore
-                                    db.collection("audioPost")
-                                            .add(audioPost)
-                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                                @Override
-                                                public void onSuccess(DocumentReference documentReference) {
-                                                    Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                                                    Toast.makeText(getActivity(), "Audio posted successfully", Toast.LENGTH_SHORT).show();
-                                                    Intent intent = new Intent(getActivity(), HomeActivity.class);
-                                                    startActivity(intent);
+                                                            //store in Firestore
+                                                            db.collection("audioPost")
+                                                                    .add(audioPost)
+                                                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                                        @Override
+                                                                        public void onSuccess(DocumentReference documentReference) {
+                                                                            Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                                                            Toast.makeText(getActivity(), "Audio posted successfully", Toast.LENGTH_SHORT).show();
+                                                                            Intent intent = new Intent(getActivity(), HomeActivity.class);
+                                                                            startActivity(intent);
+                                                                        }
+                                                                    })
+                                                                    .addOnFailureListener(new OnFailureListener() {
+                                                                        @Override
+                                                                        public void onFailure(@NonNull Exception e) {
+                                                                            Log.w(TAG, "Error adding document", e);
+                                                                            Toast.makeText(getActivity(), "Audio posted failed", Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                    });
+                                                        }
+                                                    });
                                                 }
-                                            })
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Log.w(TAG, "Error adding document", e);
-                                                    Toast.makeText(getActivity(), "Audio posted failed", Toast.LENGTH_SHORT).show();
-                                                }
-                                            });
-
-
+                                            }
+                                        }
+                                    });
                                 }
                             });
 
@@ -216,7 +235,6 @@ public class AudioFragment extends Fragment {
             Toast.makeText(getActivity(), "Audio ready for upload", Toast.LENGTH_SHORT).show();
             }
     }
-
 
 
 }

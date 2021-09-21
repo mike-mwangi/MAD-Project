@@ -1,6 +1,7 @@
 package com.example.madproject.Models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Article implements Serializable {
 	
@@ -14,6 +15,15 @@ public class Article implements Serializable {
 	private String topic;
 	private String uploadTime;
 	private String blogID;
+	ArrayList<Comment> Comments;
+
+	public ArrayList<Comment> getComments() {
+		return Comments;
+	}
+
+	public void setComments(ArrayList<Comment> comments) {
+		this.Comments = comments;
+	}
 
 	public String getBlogStory() {
 		return blogStory;

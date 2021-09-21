@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             app:liftOnScroll="true"
             app:liftOnScrollTargetViewId="@id/list"
-            android:theme="@style/ThemeOverlay.MADPROJECT.Blue.Dark">
+            android:theme="@style/ThemeOverlay.MADPROJECT.light">
 
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
@@ -52,9 +52,13 @@
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:menu="@menu/bottom_nav_menu"
+        android:theme="@style/ThemeOverlay.MADPROJECT.light"
+
+        app:labelVisibilityMode="selected"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
     <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -73,6 +73,14 @@
     <item name="colorSecondaryVariant">@color/owl_yellow_400</item>
     <item name="colorOnPrimary">#fff</item>
 </style>
+    <style name="ThemeOverlay.MADPROJECT.light" parent="@style/ThemeOverlay.MaterialComponents.ActionBar">
+        <item name="colorPrimary">#fff</item>
+        <item name="colorPrimaryVariant">#ECE7E7</item>
+        <item name="colorSecondary">@color/owl_blue_700</item>
+        <item name="colorSecondaryVariant">@color/owl_blue_800</item>
+        <item name="colorOnPrimary">#000</item>
+        <item name="colorOnPrimarySurface">#000</item>
+    </style>
 
 <style name="ThemeOverlay.MADPROJECT.Blue.Dark" parent="@style/ThemeOverlay.MaterialComponents.Dark">
     <item name="colorPrimary">@color/owl_blue_700</item>

@@ -17,6 +17,6 @@
   <item
       android:state_checked="true"
       android:color="?attr/colorSecondary"/>
-  <item android:color="#fff"/> <!--always white, invariant of theme-->
+  <item android:color="#373535"/> <!--always white, invariant of theme-->
 
 </selector>
