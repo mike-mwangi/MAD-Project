@@ -1,43 +1,138 @@
- <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <!--<style name="Theme.MADPROJECT" parent="Theme.MaterialComponents.DayNight.DarkActionBar"> -->
-        <!-- Primary brand color.
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
-         Secondary brand color.
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
-        Status bar color.
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        Customize your theme here. -->
+<!-- <resources xmlns:tools="http://schemas.android.com/tools">-->
+<!--    &lt;!&ndash; Base application theme. &ndash;&gt;-->
+<!--    &lt;!&ndash;<style name="Theme.MADPROJECT" parent="Theme.MaterialComponents.DayNight.DarkActionBar"> &ndash;&gt;-->
+<!--        &lt;!&ndash; Primary brand color.-->
+<!--        <item name="colorPrimary">@color/purple_200</item>-->
+<!--        <item name="colorPrimaryVariant">@color/purple_700</item>-->
+<!--        <item name="colorOnPrimary">@color/black</item>-->
+<!--         Secondary brand color.-->
+<!--        <item name="colorSecondary">@color/teal_200</item>-->
+<!--        <item name="colorSecondaryVariant">@color/teal_200</item>-->
+<!--        <item name="colorOnSecondary">@color/black</item>-->
+<!--        Status bar color.-->
+<!--        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>-->
+<!--        Customize your theme here. &ndash;&gt;-->
 
-   <!-- </style>-->
-     <style name="MADPROJECT.Yellow">
-         <item name="colorPrimary">@color/owl_yellow_200</item>
-         <item name="colorSecondary">@color/owl_blue_200</item>
-         <item name="colorSurface">@color/owl_yellow_dark_primary</item>
-     </style>
+<!--   &lt;!&ndash; </style>&ndash;&gt;-->
+<!--     <style name="MADPROJECT.Yellow">-->
+<!--         <item name="colorPrimary">@color/owl_yellow_200</item>-->
+<!--         <item name="colorSecondary">@color/owl_blue_200</item>-->
+<!--         <item name="colorSurface">@color/owl_yellow_dark_primary</item>-->
+<!--     </style>-->
 
-     <style name="MADPROJECT.Blue">
-         <item name="colorPrimary">@color/owl_blue_200</item>
-         <item name="colorSecondary">@color/owl_yellow_200</item>
-         <item name="colorSurface">@color/owl_blue_dark_primary</item>
-     </style>
+<!--     <style name="MADPROJECT.Blue">-->
+<!--         <item name="colorPrimary">@color/owl_blue_200</item>-->
+<!--         <item name="colorSecondary">@color/owl_yellow_200</item>-->
+<!--         <item name="colorSurface">@color/owl_blue_dark_primary</item>-->
+<!--     </style>-->
 
-     <style name="ThemeOverlay.MADPROJECT.Blue" parent="@style/ThemeOverlay.MaterialComponents.Dark">
-         <item name="colorPrimary">@color/owl_blue_200</item>
-         <item name="colorSecondary">@color/owl_yellow_200</item>
-         <item name="colorSurface">@color/owl_blue_dark_primary</item>
-     </style>
+<!--     <style name="ThemeOverlay.MADPROJECT.Blue" parent="@style/ThemeOverlay.MaterialComponents.Dark">-->
+<!--         <item name="colorPrimary">@color/owl_blue_200</item>-->
+<!--         <item name="colorSecondary">@color/owl_yellow_200</item>-->
+<!--         <item name="colorSurface">@color/owl_blue_dark_primary</item>-->
+<!--     </style>-->
 
-     <style name="ThemeOverlay.MADPROJECT.Blue.Dark"/>
+<!--     <style name="ThemeOverlay.MADPROJECT.Blue.Dark"/>-->
 
-     <style name="MADPROJECT.Pink">
-         <item name="colorPrimary">@color/owl_pink_200</item>
-         <item name="colorSecondary">@color/owl_pink_200</item>
-         <item name="colorSurface">@color/owl_pink_dark_primary</item>
-     </style>
+<!--     <style name="MADPROJECT.Pink">-->
+<!--         <item name="colorPrimary">@color/owl_pink_200</item>-->
+<!--         <item name="colorSecondary">@color/owl_pink_200</item>-->
+<!--         <item name="colorSurface">@color/owl_pink_dark_primary</item>-->
+<!--     </style>-->
+
+<!--</resources>-->
+
+<resources>
+
+    <!--Base theme, all common styling here-->
+    <style name="Base.MADPROJECT" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!--Material shape attributes-->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Owl.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Owl.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Owl.LargeComponent</item>
+
+        <!--Material type attributes-->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.Owl.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.Owl.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.Owl.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.Owl.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.Owl.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.Owl.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.Owl.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.Owl.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.Owl.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.Owl.Body2</item>
+        <item name="textAppearanceButton">@style/TextAppearance.Owl.Button</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.Owl.Caption</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.Owl.Overline</item>
+
+        <!--Platform attributes-->
+        <item name="android:navigationBarColor">@color/nav_bar</item>
+        <item name="android:statusBarColor">@color/immersive_sys_ui</item>
+
+        <!--Default styles-->
+        <item name="bottomNavigationStyle">@style/Widget.MADPROJECT.BottomNavigationView</item>
+
+    </style>
+
+    <style name="SplashTheme" parent="@style/Base.MADPROJECT">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="MADPROJECT" parent="@style/Base.MADPROJECT"/>
+
+    <style name="MADPROJECT.Yellow">
+        <item name="colorPrimary">@color/owl_yellow_500</item>
+        <item name="colorPrimaryVariant">@color/owl_yellow_400</item>
+        <item name="colorSecondary">@color/owl_blue_700</item>
+        <item name="colorSecondaryVariant">@color/owl_blue_800</item>
+    </style>
+
+    <style name="MADPROJECT.Blue">
+        <item name="colorPrimary">@color/owl_blue_700</item>
+        <item name="colorPrimaryVariant">@color/owl_blue_800</item>
+        <item name="colorSecondary">@color/owl_yellow_500</item>
+        <item name="colorSecondaryVariant">@color/owl_yellow_400</item>
+    </style>
+
+    <style name="ThemeOverlay.MADPROJECT.Blue" parent="@style/ThemeOverlay.MaterialComponents.Light">
+        <item name="colorPrimary">@color/owl_blue_700</item>
+        <item name="colorPrimaryVariant">@color/owl_blue_800</item>
+        <item name="colorSecondary">@color/owl_yellow_500</item>
+        <item name="colorSecondaryVariant">@color/owl_yellow_400</item>
+        <item name="colorOnPrimary">#fff</item>
+    </style>
+    <style name="ThemeOverlay.MADPROJECT.light" parent="@style/ThemeOverlay.MaterialComponents.ActionBar">
+        <item name="colorPrimary">#fff</item>
+        <item name="colorPrimaryVariant">#ECE7E7</item>
+        <item name="colorSecondary">@color/owl_blue_700</item>
+        <item name="colorSecondaryVariant">@color/owl_blue_800</item>
+        <item name="colorOnPrimary">#000</item>
+        <item name="colorOnPrimarySurface">#000</item>
+    </style>
+
+    <style name="ThemeOverlay.MADPROJECT.Blue.Dark" parent="@style/ThemeOverlay.MaterialComponents.Dark">
+        <item name="colorPrimary">@color/owl_blue_700</item>
+        <item name="colorPrimaryVariant">@color/owl_blue_800</item>
+        <item name="colorSecondary">@color/owl_yellow_500</item>
+        <item name="colorSecondaryVariant">@color/owl_yellow_400</item>
+        <item name="colorOnPrimary">#fff</item>
+    </style>
+
+    <style name="MADPROJECT.Pink">
+        <item name="colorPrimary">@color/owl_pink_500</item>
+        <item name="colorSecondary">@color/owl_pink_500</item>
+        <item name="colorPrimaryVariant">@color/owl_pink_600</item>
+        <item name="colorOnPrimary">#000</item>
+    </style>
+
+    <style name="ThemeOverlay.MADPROJECT.TransitionShapeAppearance.Small" parent="">
+        <item name="transitionShapeAppearance">@style/ShapeAppearance.Owl.SmallComponent</item>
+    </style>
 
 </resources>

@@ -50,6 +50,21 @@
 
 </style>
 
+    <style name="SplashTheme" parent="@style/Base.MADPROJECT">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+    </style>
+    <style name="landingScreenTheme" parent="@style/Base.MADPROJECT">
+        <item name="android:windowBackground">@drawable/landing_screen</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+    </style>
+
 <style name="MADPROJECT" parent="@style/Base.MADPROJECT"/>
 
 <style name="MADPROJECT.Yellow">

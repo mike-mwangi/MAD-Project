@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<!--    <item-->
+<!--        android:drawable="@drawable/bg_gradient"/>-->
+<!--    <item>-->
+<!--        <bitmap android:gravity="center"-->
+<!--            android:src="@drawable/landing_screen_bg"/>-->
+<!--    </item>-->
+
+<!--    <item-->
+<!--        android:top="10dp"-->
+<!--        android:drawable="@drawable/logo_no_bg"-->
+<!--        android:width="1000dp"-->
+<!--        android:height="1000dp"-->
+<!--        android:gravity="center_horizontal"-->
+<!--        />-->
+    <item
+        android:drawable="@drawable/landing_screen_bg"/>
+    <item>
+        <bitmap android:gravity="top"
+            android:src="@drawable/hadithi_no_bg"/>
+    </item>
+
+</layer-list>

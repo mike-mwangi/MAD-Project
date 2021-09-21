@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/toolbar_bg"
+        android:elevation="4dp"/>
+
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,38 +22,57 @@
     android:layout_height="match_parent"
     >
 
+
+
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:targetApi="o">
 
 
-    <com.google.android.material.imageview.ShapeableImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/author_image"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="180dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_margin="15dp"
+        android:contentDescription="@string/insert_blog_image"
         android:src="@mipmap/placeholderblogimage_foreground"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.Owl.roundedImabe" />
+        />
+
+
+<!--    <com.google.android.material.imageview.ShapeableImageView-->
+<!--        android:id="@+id/author_image"-->
+<!--        android:layout_width="70dp"-->
+<!--        android:layout_height="70dp"-->
+<!--        android:layout_marginStart="180dp"-->
+<!--        android:layout_marginTop="40dp"-->
+<!--        android:src="@mipmap/placeholderblogimage_foreground"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:shapeAppearanceOverlay="@style/ShapeAppearance.Owl.roundedImabe" />-->
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/author_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Mohamed Abdirahman"
+        android:text="@string/author_name"
         android:textAppearance="@style/TextAppearance.Owl.Overline"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/author_image" />
+        app:layout_constraintTop_toBottomOf="@id/author_image"
+        android:textSize="16sp"/>
+
+
 
     <ImageView
         android:id="@+id/blog_image"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="250dp"
         android:layout_margin="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
@@ -146,4 +180,6 @@
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
+
 </ScrollView>
+</LinearLayout>
