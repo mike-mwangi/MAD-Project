@@ -1,6 +1,8 @@
 package com.example.madproject;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -13,7 +15,7 @@ public class PostingActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager2 viewPager2;
     PostAdapter adapter;
-
+    ImageView backButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +23,15 @@ public class PostingActivity extends AppCompatActivity {
 
         tabLayout=findViewById(R.id.tabLayout);
         viewPager2=findViewById(R.id.viewpager2);
+        backButton = findViewById(R.id.backArrow);
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogClass dialogClass = new DialogClass();
+                dialogClass.show(getSupportFragmentManager(),"example dialog");
+            }
+        });
 
 
         FragmentManager fm = getSupportFragmentManager();

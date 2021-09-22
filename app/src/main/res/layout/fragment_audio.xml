@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".AudioFragment">
 
+
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +17,9 @@
         android:id="@+id/audio_image"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_marginBottom="30dp"/>
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/insert_image"
+        android:scaleType="fitXY"/>
 
     <EditText
         android:id="@+id/audio_title"
@@ -26,21 +29,19 @@
         android:layout_marginBottom="50dp"/>
 
 
-
-
-    <Button
-        android:id="@+id/audio_upload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/upload_audio"
-        />
         <Button
             android:id="@+id/attach_audio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/attach_audio"
-            />
+            android:text="@string/attach_audio" />
+
+        <Button
+            android:id="@+id/audio_upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/upload_audio" />
+
     </LinearLayout>
 </FrameLayout>
