@@ -7,16 +7,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SingleAudioActivity">
-    <com.google.android.material.imageview.ShapeableImageView
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/speaker_image"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_marginStart="180dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/insert_blog_image"
+        android:importantForAccessibility="no"
         android:src="@mipmap/placeholderblogimage_foreground"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.Owl.roundedImabe" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/speaker_name"
@@ -27,94 +30,99 @@
         android:textAppearance="@style/TextAppearance.Owl.Overline"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/speaker_image" />
+        app:layout_constraintTop_toBottomOf="@id/speaker_image"
+        />
 
     <TextView
         android:id="@+id/audio_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:text="The path to full recorvery"
-        android:textAppearance="@style/TextAppearance.Owl.Body1"
 
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.Owl.Body1"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/speaker_name" />
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/duration"
+        android:textAppearance="@style/TextAppearance.Owl.Overline"
+        app:layout_constraintTop_toBottomOf="@id/audio_title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textAlignment="center"
+        android:textColor="@color/owl_blue_800"
 
-    <ImageView
+        />
+
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/audio_image"
         android:layout_width="match_parent"
         android:layout_height="257dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:scaleType="centerCrop"
         android:src="@mipmap/placeholderblogimage_foreground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/audio_title" />
+        app:layout_constraintTop_toBottomOf="@id/duration"
+        app:shapeAppearance="@style/ShapeAppearance.Owl.CardComponent" />
+
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/forward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="68dp"
         android:text="||"
-        app:layout_constraintStart_toEndOf="@id/button"
+        app:layout_constraintStart_toEndOf="@id/pause_play"
         app:layout_constraintTop_toBottomOf="@id/audio_image" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/pause_play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
 
-
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="76dp"
-        android:text=">>"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="68dp"
+        android:text="FORWARD"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/audio_image" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/backward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="68dp"
 
-        android:layout_toRightOf="@+id/button3"
-        android:text="backk"
-        app:layout_constraintStart_toEndOf="@id/button3"
-        app:layout_constraintTop_toBottomOf="@id/audio_image" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="76dp"
-
-
-        android:text="back"
-        app:layout_constraintStart_toEndOf="@id/button2"
+        android:layout_marginEnd="24dp"
+        android:text="backward"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/audio_image" />
 
     <SeekBar
         android:id="@+id/seekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button"
+        android:layout_above="@+id/pause_play"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/audio_image" />
+        app:layout_constraintTop_toBottomOf="@id/audio_image"
 
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

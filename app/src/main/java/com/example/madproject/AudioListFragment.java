@@ -34,6 +34,7 @@ public class AudioListFragment extends Fragment {
     ArrayList<Audio> audioArrayList;
     RecyclerView audioRecyclerView;
     AudioListAdapter audioListAdapter;
+    private Audio audio;
 
     public AudioListFragment() {
         // Required empty public constructor
@@ -74,7 +75,7 @@ public class AudioListFragment extends Fragment {
 
                         for(DocumentChange dc:value.getDocumentChanges()){
                             if(dc.getType()==DocumentChange.Type.ADDED){
-                                Audio audio = dc.getDocument().toObject(Audio.class);
+                                audio = dc.getDocument().toObject(Audio.class);
                                 audio.setAudioID(dc.getDocument().getId());
                                 audioArrayList.add(audio);
 
