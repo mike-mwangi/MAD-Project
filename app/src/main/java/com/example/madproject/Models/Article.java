@@ -17,6 +17,7 @@ public class Article implements Serializable {
 	private String blogID;
 	ArrayList<Comment> Comments;
 
+
 	public ArrayList<Comment> getComments() {
 		return Comments;
 	}

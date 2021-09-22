@@ -75,26 +75,27 @@
 
 
     <Button
+        android:id="@+id/pause_play"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="68dp"
+        android:text="| |"
+        app:layout_constraintEnd_toStartOf="@+id/forward"
+        app:layout_constraintStart_toEndOf="@id/backward"
+        app:layout_constraintTop_toBottomOf="@id/audio_image" />
+
+    <Button
         android:id="@+id/forward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginStart="24dp"
+
         android:layout_marginTop="68dp"
-        android:text="||"
-        app:layout_constraintStart_toEndOf="@id/pause_play"
-        app:layout_constraintTop_toBottomOf="@id/audio_image" />
-
-    <Button
-        android:id="@+id/pause_play"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginEnd="16dp"
         android:text="FORWARD"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/audio_image" />
 
     <Button
@@ -102,11 +103,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginTop="68dp"
+        android:layout_marginStart="16dp"
 
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="68dp"
         android:text="backward"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/audio_image" />
 
     <SeekBar

@@ -16,15 +16,15 @@
         android:layout_height="200dp"
         android:padding="20dp">
 
-        <ImageButton
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
             android:layout_width="150dp"
             android:layout_height="141dp"
             android:layout_alignParentLeft="true"
+            android:layout_marginLeft="93dp"
             android:contextClickable="true"
-            android:src="@drawable/ic_baseline_insert_photo"
+            android:src="@drawable/ic_baseline_insert_photo" />
 
-            />
         <TextView
             android:id="@+id/username_prof"
             android:layout_width="wrap_content"

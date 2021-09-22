@@ -7,12 +7,24 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/toolbar_bg"
-        android:elevation="4dp"/>
+        app:liftOnScroll="true"
+        app:liftOnScrollTargetViewId="@id/fragment_placeholder"
+        android:theme="@style/ThemeOverlay.MADPROJECT.light">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlways|snap"
+            app:navigationIcon="@mipmap/hadithi_logo_foreground"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"

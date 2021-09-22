@@ -2,6 +2,7 @@ package com.example.madproject;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -9,18 +10,28 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.madproject.Adapters.MainArticleAdapter;
 import com.example.madproject.Models.Article;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -45,21 +56,14 @@ public class HomeActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     private FragmentTransaction ft;
     BottomNavigationView bottomNavigationView;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        toolbar=findViewById(R.id.home_toolbar);
 
-        //Ensure user doesn't have a blank screen while recycler view fetches posts
-      /*  progressDialog=new ProgressDialog(this);
-        progressDialog.setCancelable(true);
-        progressDialog.setMessage("Fetching Posts....");
-        progressDialog.show();
-
-       */
-
-        //Initialize views and data structures
         initialize();
         ft = getSupportFragmentManager().beginTransaction();
         BlogListFragment blogListFragment=BlogListFragment.newInstance();
@@ -101,6 +105,16 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                if(menuItem.getItemId()==R.id.account)
+                {
+                    startActivity(new Intent(HomeActivity.this,ProfileActivity.class));
+                }
+                return true;
+            }
+        });
 
 
 
@@ -108,23 +122,32 @@ public class HomeActivity extends AppCompatActivity {
 
 
     private void initialize() {
-
-    //    Toolbar toolbar = findViewById(R.id.toolbar);
-      //  setSupportActionBar(toolbar);
-
-        //toolbar.setTitle("Home");
-
-
         fab=findViewById(R.id.fab);
-
-
-
-       fab.setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
                startActivity(new Intent(HomeActivity.this,PostingActivity.class));
            }
        });
+        FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserHelper value = snapshot.getValue(UserHelper.class);
+                Glide.with(HomeActivity.this)
+                        .load(value.getUserImage())
+                        .into(new SimpleTarget<Drawable>() {
+                            @Override
+                            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                                toolbar.getMenu().getItem(0).setIcon(resource);
+                            }
+                        });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 
@@ -164,6 +187,10 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -11,12 +11,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.GestureDetector;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.example.madproject.Models.Audio;
@@ -44,6 +46,9 @@ public class SingleAudioActivity extends AppCompatActivity {
     MediaPlayer mediaPlayer;
     SeekBar seekbar;
     Audio myAudio;
+    Toolbar toolbar;
+    private int length;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,15 +64,29 @@ public class SingleAudioActivity extends AppCompatActivity {
         speakerImage=findViewById(R.id.speaker_image);
         speakerName=findViewById(R.id.speaker_name);
         songDuration=findViewById(R.id.duration);
+        toolbar=findViewById(R.id.home_toolbar);
 
         Intent intent = getIntent();
         String audioID = intent.getStringExtra("audioID");
         fetchAudioFromDatabase(audioID);
 
         pauseBtn.setOnClickListener(new View.OnClickListener() {
+
+
+
             @Override
             public void onClick(View view) {
-                mediaPlayer.pause();
+                if(mediaPlayer.isPlaying()) {
+                    mediaPlayer.pause();
+                    pauseBtn.setText("PLAY");
+                    length = mediaPlayer.getCurrentPosition();
+                }
+                else{
+                    mediaPlayer.start();
+                    mediaPlayer.seekTo(length);
+                    pauseBtn.setText("| |");
+                }
+
             }
         });
         forwardBtn.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +95,7 @@ public class SingleAudioActivity extends AppCompatActivity {
 
             }
         });
+
 
 
     }
@@ -148,15 +168,12 @@ public class SingleAudioActivity extends AppCompatActivity {
                 long currentMinutes = (currentDuration/ 1000) / 60;
                 long currentSeconds = (currentDuration/ 1000) % 60;
 
-                // Displaying Total Duration time
                 songDuration.setText(String.valueOf(totalMinutes)+" : "+String.valueOf(totalSeconds)+" / "+String.valueOf(currentMinutes)+" : "+String.valueOf(currentSeconds));
-                // Displaying time completed playing
 
-                double Percentageused = (long)((float)currentDuration/totalDuration*100);
-                double progress = (double) ((currentDuration/totalDuration)*100);
-                // System.out.println("Progress : "+progress);
 
-                seekbar.setProgress((int) Percentageused);
+                double percentageUsed = (long)((float)currentDuration/totalDuration*100);
+
+                seekbar.setProgress((int) percentageUsed);
 
                 // Running this thread after 100 milliseconds
                 mHandler.postDelayed(this, 1000);

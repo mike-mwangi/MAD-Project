@@ -34,7 +34,9 @@
                 android:minHeight="?attr/actionBarSize"
                 app:layout_scrollFlags="scroll|enterAlways|snap"
                 app:menu="@menu/profile"
-                app:navigationIcon="@mipmap/hadithi_logo_foreground" />
+                app:navigationIcon="@mipmap/hadithi_logo_foreground"
+                android:id="@+id/home_toolbar"
+                />
 
         </com.google.android.material.appbar.AppBarLayout>
 

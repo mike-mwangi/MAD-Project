@@ -16,10 +16,13 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -38,7 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextInputLayout fname,email,number;
     private TextView username;
     private Button updateUserButton;
-    private ImageButton profileImg;
+    private ImageView profileImg;
 
     //private FirebaseUser user;
     private DatabaseReference databaseReference;
@@ -48,6 +51,7 @@ public class ProfileActivity extends AppCompatActivity {
     private String usernumber = "";
     private String userFName = "";
     private String userName = "";
+    private String userImage;
 
     static int reqCode=1;
     private final int IMAGE_REQUEST = 1;
@@ -135,6 +139,10 @@ public class ProfileActivity extends AppCompatActivity {
                     usernumber = snapshot.child(uid).child("number").getValue(String.class);
                     userFName = snapshot.child(uid).child("fname").getValue(String.class);
                     userName = snapshot.child(uid).child("username").getValue(String.class);
+                    userImage=snapshot.child(uid).child("userImage").getValue(String.class);
+                    Glide.with(ProfileActivity.this)
+                            .load(userImage)
+                            .into(profileImg);
 
                     fname.getEditText().setText(userFName);
                     number.getEditText().setText(usernumber);

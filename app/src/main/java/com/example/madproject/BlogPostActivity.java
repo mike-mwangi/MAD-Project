@@ -24,6 +24,7 @@ import com.example.madproject.Models.Article;
 import com.example.madproject.Models.Comment;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -67,6 +68,7 @@ public class BlogPostActivity extends AppCompatActivity {
     private DocumentReference article1;
     private Article articleObject;
     private ArrayList<Comment> comments;
+    private MaterialCheckBox commentCheckBox,likesCheckBox;
 
 
     @Override
@@ -76,7 +78,7 @@ public class BlogPostActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("My Hadithi");
+        getSupportActionBar().setTitle("");
 
         Intent intent = getIntent();
         String articleID = intent.getStringExtra("articleID");
@@ -119,6 +121,7 @@ public class BlogPostActivity extends AppCompatActivity {
 
             }
         });
+       // likesCheckBox.setOn
     }
 
     public void shareText(View view) {
@@ -146,6 +149,8 @@ public class BlogPostActivity extends AppCompatActivity {
 
                 comments = articleObject.getComments();
                 commentAdapter.setComments(comments);
+               // likesCheckBox.setText(articleObject.get);
+//                commentCheckBox.setText(comments.size() + " comments ");
                 storyView.loadData(articleObject.getBlogStory(), "text/html; charset=utf-8", "UTF-8");
                 blogTitle.setText(articleObject.getBlogTitle());
 
