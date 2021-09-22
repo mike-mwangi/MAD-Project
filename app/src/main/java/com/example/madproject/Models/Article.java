@@ -16,7 +16,15 @@ public class Article implements Serializable {
 	private String uploadTime;
 	private String blogID;
 	ArrayList<Comment> Comments;
+	ArrayList<Like> likes;
 
+	public ArrayList<Like> getLikes() {
+		return likes;
+	}
+
+	public void setLikes(ArrayList<Like> likes) {
+		this.likes = likes;
+	}
 
 	public ArrayList<Comment> getComments() {
 		return Comments;

@@ -90,6 +90,8 @@ public class BlogPostActivity extends AppCompatActivity {
         postComment=findViewById(R.id.post_comment);
         authorImage=findViewById(R.id.author_image);
         authorName=findViewById(R.id.author_name);
+        likesCheckBox=findViewById(R.id.like);
+        commentCheckBox=findViewById(R.id.show_comments_btn);
 
         commentAdapter = new CommentAdapter(this);
         commentRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -121,7 +123,39 @@ public class BlogPostActivity extends AppCompatActivity {
 
             }
         });
-       // likesCheckBox.setOn
+       likesCheckBox.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               Calendar calendar = Calendar.getInstance();
+               SimpleDateFormat cDate = new SimpleDateFormat("MM/dd/yyyy");
+               final String currentDate = cDate.format(calendar.getTime());
+               if(likesCheckBox.isChecked()){
+                   Map<String,Object> like=new HashMap<>();
+                   like.put("userID",FirebaseAuth.getInstance().getUid());
+                   article1.update("likes", FieldValue.arrayUnion(like)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                       @Override
+                       public void onSuccess(Void unused) {
+
+                           commentAdapter.notifyDataSetChanged();
+                       }
+                   });
+               }
+               else {
+                   Map<String,Object> like=new HashMap<>();
+                   like.put("userID",FirebaseAuth.getInstance().getUid());
+
+                   article1.update("likes", FieldValue.arrayRemove(like)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                       @Override
+                       public void onSuccess(Void unused) {
+
+                           commentAdapter.notifyDataSetChanged();
+                       }
+                   });
+               }
+           }
+       });
+        storyView.setVerticalScrollBarEnabled(true);
+        storyView.setHorizontalScrollBarEnabled(true);
     }
 
     public void shareText(View view) {
@@ -149,8 +183,20 @@ public class BlogPostActivity extends AppCompatActivity {
 
                 comments = articleObject.getComments();
                 commentAdapter.setComments(comments);
-               // likesCheckBox.setText(articleObject.get);
-//                commentCheckBox.setText(comments.size() + " comments ");
+                if(articleObject.getLikes()!=null) {
+                    likesCheckBox.setText(articleObject.getLikes().size() + " likes");
+                }
+                else {
+                    likesCheckBox.setText("0 " + " likes");
+                }
+                if(comments!=null)
+                {
+                    commentCheckBox.setText(comments.size() + " comments ");
+                }
+                else {
+                    commentCheckBox.setText("0 comments");
+                }
+
                 storyView.loadData(articleObject.getBlogStory(), "text/html; charset=utf-8", "UTF-8");
                 blogTitle.setText(articleObject.getBlogTitle());
 
